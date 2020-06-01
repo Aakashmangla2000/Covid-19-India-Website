@@ -7,3 +7,10 @@
     stroke: white;
 }
 
+body{
+    background-color: black;
+}
+
+*{
+    color: wheat;
+}
