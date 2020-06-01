@@ -7,9 +7,7 @@
     <!-- <link rel="stylesheet" href="materialize/css/materialize.css"> -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel='shortcut icon' type='image/x-icon' href='svg/covid.png' />
-    
-    <title>Covid19Tracker</title>
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet"></head>
 </script>
 <body style="background-color: black;">
 
@@ -52,18 +50,69 @@
 
 
 
-    <div class="container">
+   <div class="container">
          <!-- <h1>COVID-19 INDIA TRACKER</h1> -->
          <br>
+         <!-- <div class="row">
+            <div class="col">
+               <div class="card border-danger mb-3 text-white" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-danger " style="font-size: 1vw">Confirmed</div>
+                  <div class="card-body text-danger">
+                     <span class="badge badge-danger" id="new-val-c">Danger</span>
+                    <h5 class="card-title text-danger" id="total-c">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+            <div class="col">
+               <div class="card border-primary text-primary mb-3" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-primary " style="font-size: 1vw">Active</div>
+                  <div class="card-body text-primary">
+                     <span class="badge badge-primary" id="new-val-a">Primary</span>
+                    <h5 class="card-title text-primary" id="total-a">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
 
-
+            <div class="col">
+               <div class="card border-success text-success mb-3" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-success " style="font-size: 1vw">Recovered</div>
+                  <div class="card-body text-success">
+                     <span class="badge badge-success" id="new-val-r">Success</span>
+                    <h5 class="card-title text-success" id="total-r">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+            <div class="col">
+               <div class="card border-white text-white mb-3" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-white " style="font-size: 1vw">Deceased</div>
+                  <div class="card-body text-white">
+                     <span class="badge badge-secondary" id="new-val-d">Secondary</span>
+                    <h5 class="card-title text-white" id="total-d">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+            
+         </div>   -->
+         <div style="display:flex; align-items:center; justify-content: center; ">
+            <ul class="list-group list-group-horizontal">
+               <li class="list-group-item list-group-item-danger font-weight-bold">Confirmed <p class="text-danger"  id="new-val-c" style="border: solid 2px; border-radius: 8px;">0</p> <p class="text-danger"  id="total-c">0</p></li>
+               <li class="list-group-item list-group-item-primary font-weight-bold">Active <p class="text-primary" id="new-val-a"  style="border: solid 2px; border-radius: 8px;">0</p> <p  class="text-primary" id="total-a">0</p></li>
+               <li class="list-group-item list-group-item-success font-weight-bold">Recovered <p class="text-success" id="new-val-r"  style="border: solid 2px; border-radius: 8px;">0</p> <p class="text-success"  id="total-r">0</p></li>
+               <li class="list-group-item list-group-item-secondary font-weight-bold">Deceased <p class="text-secondary" id="new-val-d"  style="border: solid 2px; border-radius: 8px;">0</p> <p  class="text-secondary" id="total-d">0</p></li>
+             </ul>
+         </div>
           
-       
+       <br>
       
       <div class="container">
+         
          <div class="row">
            <div class="col">
-            <table id="dtBasicExample" class="table table-hover table-dark" cellspacing="0" width="100%">
+            <table id="dtBasicExample" class="table table-hover table-dark table-striped" cellspacing="0" width="100%">
                <thead>
                  <tr>
                    <th class="th-sm">State/UT
@@ -91,9 +140,19 @@
    
            </div>
            <div class="col-xl">
-            <h2 id="state-name">State</h2>
+            <h2 id="state-name" class="text-danger">State</h2>
+            <br>
 
-            <div class="row">
+
+            <ul class="list-group list-group-horizontal">
+               <li class="list-group-item list-group-item-danger">Confirmed <p class="text-danger"  id="confirmed-cases">0</p></li>
+               <li class="list-group-item list-group-item-primary">Active <p  class="text-primary" id="active-cases">0</p></li>
+               <li class="list-group-item list-group-item-success">Recovered <p class="text-success"  id="recovered-cases">0</p></li>
+               <li class="list-group-item list-group-item-secondary">Deceased <p  class="text-secondary" id="ded-cases">0</p></li>
+             </ul>
+         
+
+            <!-- <div class="row">
                 <div class="col m3 s3">Confirmed Cases:</div>
                 <div class="col m3 s3">Active Cases</div>
                 <div class="col m3 s3">Recovered</div>
@@ -101,11 +160,74 @@
             </div>
     
             <div class="row">
-                <div class="col m3 s3" id="confirmed-cases">0</div>
-                <div class="col m3 s3" id='active-cases'>0</div>
+                <!-- <div class="col m3 s3" id="confirmed-cases">0</div> -->
+                <!-- <div class="col m3 s3" id='active-cases'>0</div>
                 <div class="col m3 s3" id='recovered-cases'>0</div>
                 <div class="col m3 s3" id="ded-cases">0</div>
+            </div> --> 
+            <!-- <div class="container">
+               <div class="row">
+                  <div class="col"></div>
+               <div class="col">
+                  <div class="row">Confirmed Cases</div>
+                  <div class="row" id="confirmed-cases">0</div>
+               </div>
+               <div class="col">
+                  <div class="row">Active Cases</div>
+                  <div class="row" id="active-cases">0</div>
+               </div>
+               <div class="col">
+                  <div class="row">Recovered</div>
+                  <div class="row" id="recovered-cases">0</div>
+               </div>
+               <div class="col">
+                  <div class="row">Deceased</div>
+                  <div class="row" id="ded-cases">0</div>
+               </div>
             </div>
+         </div> -->
+      
+         <!-- <div class="row">
+            <div class="col">
+               <div class="card border-danger mb-3 text-white" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-danger">Confirmed</div>
+                  <div class="card-body text-danger">
+                    <h5 class="card-title text-danger" id="confirmed-cases">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+            <div class="col">
+               <div class="card border-primary text-primary mb-3" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-primary">Active</div>
+                  <div class="card-body text-primary">
+                    <h5 class="card-title text-primary" id="active-cases">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col">
+               <div class="card border-success text-success mb-3" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-success">Recovered</div>
+                  <div class="card-body text-success">
+                    <h5 class="card-title text-success" id="recovered-cases">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+            <div class="col">
+               <div class="card border-white text-white mb-3" style="opacity: 1; background-color: rgb(53, 53, 53);">
+                  <div class="card-header text-white">Deceased</div>
+                  <div class="card-body text-white">
+                    <h5 class="card-title text-white" id="ded-cases">0</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+            </div>
+            
+         </div>             -->
+            
     
     
             <div class="container">
@@ -291,6 +413,7 @@
            </div>
          </div>
       </div>
+      <br><br>
       <h6 style="float: right;">Made with ❤️ by Aakash and Mayank</h6>
 
 
