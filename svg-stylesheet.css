@@ -1,9 +1,9 @@
 .state-stroke:hover{
-    fill: red;
+    fill: #ff3333;
 }
 
 #svg2{
-    fill: salmon;
+    fill: rgb(243, 143, 132);
     stroke: white;
 }
 
