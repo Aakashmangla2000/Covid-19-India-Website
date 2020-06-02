@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
 <svg
    xmlns:mapsvg="http://mapsvg.com"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -12,6 +13,7 @@
    width="611.85999"
    mapsvg:geoViewBox="68.184010 37.084109 97.418146 6.753659"
 >
+     <script type="text/ecmascript" xlink:href="../js/map.js"/>
   <metadata
      id="metadata44">
     <rdf:RDF>
