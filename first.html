@@ -42,8 +42,9 @@
   <div class="container">
      <!-- <h1>COVID-19 INDIA TRACKER</h1> -->
      <br><br><br><br>
-     
-     
+     <!-- <div style="align-content: center; justify-content: center; display: flex;">
+      <iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:450px;height:270px;"src="https://www.clocklink.com/html5embed.php?clock=048&timezone=GMT0530&color=black&size=450&Title=&Message=&Target=&From=2020,1,1,0,0,0&Color=blue"></iframe>  
+     </div> -->
      <div class="top-box col-xl">
         <span class="box font-weight-bold text-danger" style="font-size: 0.9em;">Confirmed 
            <span class="text-danger"  id="new-val-c" >0</span>
@@ -85,10 +86,29 @@
          </div>
            
          <div class="col-xl">
-
+            <!-- <div class="row">     -->
+                      <h1 style="color: darkred; margin-left: 3px;">India-Map</h1>
+                
+                      
+            <!-- </div> -->
             <h2 id="state-name" class="text-danger">State</h2>
-           
+            <p>Hover over states to view their data</p>
 
+
+               <form action="#" method="post" id="demoForm" class="demoForm">
+
+                  <fieldset>                      
+                      <p>
+                          <select onchange="selectBox()" style="color: black;" id="scripts" name="scripts">
+                           <option value="TT">All States</option><option value="AN">Andaman and Nicobar Islands</option><option value="AP">Andhra Pradesh</option><option value="AR">Arunachal Pradesh</option><option value="AS">Assam</option><option value="BR">Bihar</option><option value="CH">Chandigarh</option><option value="CT">Chhattisgarh</option><option value="DL">Delhi</option><option value="DN">Dadra and Nagar Haveli and Daman and Diu</option><option value="GA">Goa</option><option value="GJ">Gujarat</option><option value="HP">Himachal Pradesh</option><option value="HR">Haryana</option><option value="JH">Jharkhand</option><option value="JK">Jammu and Kashmir</option><option value="KA">Karnataka</option><option value="KL">Kerala</option><option value="LA">Ladakh</option><option value="LD">Lakshadweep</option><option value="MH">Maharashtra</option><option value="ML">Meghalaya</option><option value="MN">Manipur</option><option value="MP">Madhya Pradesh</option><option value="MZ">Mizoram</option><option value="NL">Nagaland</option><option value="OR">Odisha</option><option value="PB">Punjab</option><option value="PY">Puducherry</option><option value="RJ">Rajasthan</option><option value="SK">Sikkim</option><option value="TG">Telangana</option><option value="TN">Tamil Nadu</option><option value="TR">Tripura</option><option value="UN">Unassigned</option><option value="UP">Uttar Pradesh</option><option value="UT">Uttarakhand</option><option value="WB">West Bengal</option>
+                          </select>
+                          
+                          <!-- <input type="text" size="30" name="display" id="display" /> -->
+                      </p>
+              
+                  </fieldset>
+              </form>
+<br>
               <div class="top-box1 ">
                  <span class="box font-weight-bold text-danger bg1" style="font-size: 0.8em;">Confirmed 
                   
@@ -309,6 +329,8 @@ colr = ['rgba(255, 99, 132, 0.8)',
     return data;
     }   
 
+
+
 var myChart = [];
 
 function createLineGraph(dat = [], date_data, id, colourScheme, type, x=0){
@@ -369,19 +391,16 @@ function createLineGraph(dat = [], date_data, id, colourScheme, type, x=0){
 }
 
 function addData(chart,label,data) {
-       // console.log(chart.data.datasets[0].data,data)
         chart.data.datasets[0].data = data;
       //  chart.data.labels[0]=label
-       // console.log(chart.data.datasets[0].data,data)
 
         chart.update();
-       // console.log('working')
 }
 
    
 
 
-    async function createTotalGraph(id,t,cl,tp,y){
+async function createTotalGraph(id,t,cl,tp,y){
         let dat = await getD('https://api.covid19india.org/data.json');
         let dat3 = await dat.cases_time_series;
         let graphData = [];
@@ -417,7 +436,6 @@ function addData(chart,label,data) {
         }
         else{
         addData(createLineGraph(dat3,date_data,'myChart2',colr[0],'Confirmed',1)[y],'ok',dat2);
-        console.log('upo')
       }
     }
 
@@ -427,31 +445,34 @@ function addData(chart,label,data) {
     createTotalGraph('myChart4','td',colr[3],'Deceased',5);
 
 
-function hoverH(s){
-   //  document.getElementById(`${s.id}`).style.fill = "rgb(243, 143, 132)";
-   //  createTotalGraph('myChart','tc',colr[0],'Confirmed');
-   //  createTotalGraph('myChart2','ta',colr[1],'Active');
-   //  createTotalGraph('myChart3','tr',colr[2],'Recovered');
-   //  createTotalGraph('myChart4','td',colr[3],'Deceased');
-   document.getElementById("active-cases").innerText = 0;
-   document.getElementById("confirmed-cases").innerText = 0;
-   document.getElementById("recovered-cases").innerText = 0;
-   document.getElementById("ded-cases").innerText = 0;
-   document.getElementById("state-name").innerText = 'State';
+async function hoverH(s){
+    let dat = await fetch(`https://api.covid19india.org/data.json`)
+    let dat2 = await dat.json()
+    let dat3 = dat2.cases_time_series;
+    let active = (dat3[dat3.length-1].totalconfirmed);
+    let recovered = (dat3[dat3.length-1].totalrecovered);
+    let ded = (dat3[dat3.length-1].totaldeceased);   
+
+   document.getElementById("active-cases").innerText = addComma(active-recovered-ded);
+   document.getElementById("confirmed-cases").innerText = addComma(active);
+   document.getElementById("recovered-cases").innerText = addComma(recovered);
+   document.getElementById("ded-cases").innerText = addComma(ded);
+   document.getElementById("state-name").innerText = 'Total';
 
     createTotalGraph('myChart','tc',colr[0],'Confirmed',0);
     createTotalGraph('myChart2','ta',colr[1],'Active',1);
     createTotalGraph('myChart3','tr',colr[2],'Recovered',2);
     createTotalGraph('myChart4','td',colr[3],'Deceased',3);
-   console.log('j')
    document.getElementById(`${s}`).style.fill = "rgb(243, 143, 132)";
 
 }
 
-async function hoverK(s){
+async function hoverK(s,flag){
 
     let idd = 0;
-    if(s.length>2){
+    if(flag===1)
+    idd = s;
+    else if(s.length>2){
     idd = `${s.slice(3,5).toLowerCase()}`;
     document.getElementById(`${s}`).style.fill = "ff3333";
     }
@@ -484,19 +505,62 @@ async function hoverK(s){
     for(let i = 0; i < dat.length;i++){
         dat4.push(dat[i]-dat2[i]-dat3[i])
     }
-   //  createLineGraph(dat,dts,'myChart',colr[0],'Confirmed');
-   //  createLineGraph(dat4,dts,'myChart2',colr[1], 'Active');
-   //  createLineGraph(dat2,dts,'myChart3',colr[2], 'Recovered');
-   //  createLineGraph(dat3,dts,'myChart4',colr[3], 'Deceased');
-      //console.log(dat)
+
        addData(createLineGraph(dat,dts,'myChart2',colr[0],'Confirmed',1)[0],'ok',dat);
        addData(createLineGraph(dat4,dts,'myChart2',colr[0],'Confirmed',1)[1],'ok',dat4);
        addData(createLineGraph(dat2,dts,'myChart2',colr[0],'Confirmed',1)[2],'ok',dat2);
        addData(createLineGraph(dat3,dts,'myChart2',colr[0],'Confirmed',1)[3],'ok',dat3);
 
-      // console.log(createLineGraph(dat,dts,'myChart',colr[0],'Confirmed',1).data.datasets[0].data,'hi')
-
 }
+
+// async function getap(){
+//    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+//    let url = 'http://newsapi.org/v2/top-headlines?country=in&apiKey=73612192f06e4bf0a5663326c228d59f'
+//    let data = await fetch(proxyurl+ url)
+//    let data2 = data.json()
+//    console.log(data2)
+// }
+// getap()
+
+function selectBox() {
+    
+    // get references to select list and display text box
+    var sel = document.getElementById('scripts');
+   // var el = document.getElementById('display');
+    let a = (sel.options[sel.selectedIndex].value).toLowerCase();
+
+   //  function getSelectedOption(sel) {
+   //      var opt;
+   //      for ( var i = 0, len = sel.options.length; i < len; i++ ) {
+   //          opt = sel.options[i];
+   //          if ( opt.selected === true ) {
+   //              break;
+   //          }
+   //      }
+   //      return opt;
+   //  }
+
+   //  // assign onclick handlers to the buttons
+   //  document.getElementById('showVal').onclick = function () {
+   //     // el.value = sel.value; 
+   //     var a = sel.value.toLowerCase()
+        hoverK(a,1)   
+        hoverKara(a,1)   
+        // hoverKara()
+   //  }
+    
+    // document.getElementById('showTxt').onclick = function () {
+    //     // access text property of selected option
+    //     el.value = sel.options[sel.selectedIndex].text;
+    // }
+
+    // document.getElementById('doLoop').onclick = function () {
+    //     var opt = getSelectedOption(sel);
+    //     el.value = opt.value;
+    // }
+    
+}
+
 </script>
 
 <script src="js/map.js"></script>

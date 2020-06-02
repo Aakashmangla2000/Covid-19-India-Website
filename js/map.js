@@ -42,6 +42,17 @@ st = {
 //check length of object
 //console.log(Object.keys(st).length)
 
+function addComma(x){
+    // var x=12345678;
+    x = x.toString();
+    var lastThree = x.substring(x.length-3);
+    var otherNumbers = x.substring(0,x.length-3);
+    if(otherNumbers != '')
+        lastThree = ',' + lastThree;
+    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    return res
+}
+
 async function getData(){
     let result = await fetch(`https://api.covid19india.org/states_daily.json`)
     let data = await result.json();
@@ -70,18 +81,20 @@ async function updateData(){
     //         ded += parseInt(data2[i][state]);
     //     }
     // }
-   document.getElementById("total-a").innerText = (active-recovered-ded);
-   document.getElementById("total-c").innerText = active;
-   document.getElementById("total-r").innerText = recovered;
-   document.getElementById("total-d").innerText = ded;
+   document.getElementById("total-a").innerText = addComma(active-recovered-ded);
+   document.getElementById("total-c").innerText = addComma(active);
+   document.getElementById("total-r").innerText = addComma(recovered);
+   document.getElementById("total-d").innerText = addComma(ded);
 
-   document.getElementById("new-val-a").innerText = "+" + (nactive-nrecovered-nded);
-   document.getElementById("new-val-c").innerText = "+" + nactive;
-   document.getElementById("new-val-r").innerText = "+" + nrecovered;
-   document.getElementById("new-val-d").innerText = "+" + nded;
+   document.getElementById("new-val-a").innerText = "[↑" + addComma(nactive-nrecovered-nded) +']';
+   document.getElementById("new-val-c").innerText = "[↑" + addComma(nactive) + ']';
+   document.getElementById("new-val-r").innerText = "[↑" + addComma(nrecovered) + ']';
+   document.getElementById("new-val-d").innerText = "[↑" + addComma(nded)  + ']';
 }
 
 updateData()
+
+
 
 function changeValues(data2, state){
     let active = 0;
@@ -100,23 +113,27 @@ function changeValues(data2, state){
     }
   
    // console.log(`Number of cases in ${state} is ${count}`)
-   document.getElementById("active-cases").innerText = active-recovered-ded;
-   document.getElementById("confirmed-cases").innerText = active;
-   document.getElementById("recovered-cases").innerText = recovered;
-   document.getElementById("ded-cases").innerText = ded;
+   document.getElementById("active-cases").innerText = addComma(active-recovered-ded);
+   document.getElementById("confirmed-cases").innerText = addComma(active);
+   document.getElementById("recovered-cases").innerText = addComma(recovered);
+   document.getElementById("ded-cases").innerText = addComma(ded);
    document.getElementById("state-name").innerText = st[state];
 }
 
 
-async function hoverKara(s){
+async function hoverKara(s,flag){
    // console.log(document.querySelector(`#${stateIds[1].id}`));
   //  var s = stateIds[eventLis.findIndex()].id.slice(3,5).toLowerCase()
     data = await getData()
-    if(this.id.length>2)
+    
+    if(flag===1){
+        changeValues(data,s)
+    }
+    else if(this.id.length>2)
     changeValues(data,this.id.slice(3,5).toLowerCase())
     else{    
         changeValues(data,this.id)
-        document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "ff3333";
+        document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "#ff3333";
        // document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
     }
    // console.log(document.getElementById(`IN-${this.id.toUpperCase()}`))
@@ -182,33 +199,34 @@ async function createTable(){
 
 
         nhtml = html.replace('%st%', st[state2]);
-        nhtml = nhtml.replace('%c%', active);
-        nhtml = nhtml.replace('%a%', active-recovered-ded);
-        nhtml = nhtml.replace('%r%', recovered);
-        nhtml = nhtml.replace('%d%', ded);
+        nhtml = nhtml.replace('%c%', addComma(active));
+        nhtml = nhtml.replace('%a%', addComma(active-recovered-ded));
+        nhtml = nhtml.replace('%r%', addComma(recovered));
+        nhtml = nhtml.replace('%d%', addComma(ded));
 
         if(d_c!=0)
-        nhtml = nhtml.replace('%d-c%', "+" + d_c + "");
+        nhtml = nhtml.replace('%d-c%', "↑" + d_c + "");
         else
         nhtml = nhtml.replace('%d-c%', ""); + ""
         
         if((d_c-d_r-d_d)!=0)
-        nhtml = nhtml.replace('%d-a%', "+" + (d_c-d_r-d_d) + "");
+        nhtml = nhtml.replace('%d-a%', "↑" + (d_c-d_r-d_d) + "");
         else
         nhtml = nhtml.replace('%d-a%', "");
 
         if(d_r!=0)
-        nhtml = nhtml.replace('%d-r%', "+" + d_r + "");
+        nhtml = nhtml.replace('%d-r%', "↑" + d_r + "");
         else
         nhtml = nhtml.replace('%d-r%', "");
 
         if(d_d!=0)
-        nhtml = nhtml.replace('%d-d%', "+" + d_d + "");
+        nhtml = nhtml.replace('%d-d%', "↑" + d_d + "");
         else
         nhtml = nhtml.replace('%d-d%', "");
 
 
         document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
+     //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
         document.getElementById(state2).addEventListener("mouseout",hoverHataya)
         document.getElementById(state2).addEventListener("mouseover",hoverKara)
 
@@ -216,4 +234,35 @@ async function createTable(){
 }
 
 createTable();
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  function filterFunction() {
+      console.log('hi')
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+}
+
+function test(){
+   console.log(document.getElementById('cars').value);
+   console.log('hi')
+}
+
+
+ 
+
+test()
 
