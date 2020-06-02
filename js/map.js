@@ -43,16 +43,16 @@ st = {
 //console.log(Object.keys(st).length)
 
 async function getData(){
-    const result = await fetch(`https://api.covid19india.org/states_daily.json`)
-    const data = await result.json();
-    const data2 = data.states_daily;
+    let result = await fetch(`https://api.covid19india.org/states_daily.json`)
+    let data = await result.json();
+    let data2 = data.states_daily;
     return data2;
 }
 
 async function updateData(){
-    const dat = await fetch(`https://api.covid19india.org/data.json`)
-    const dat2 = await dat.json()
-    const dat3 = dat2.cases_time_series;
+    let dat = await fetch(`https://api.covid19india.org/data.json`)
+    let dat2 = await dat.json()
+    let dat3 = dat2.cases_time_series;
     let active = (dat3[dat3.length-1].totalconfirmed);
     let recovered = (dat3[dat3.length-1].totalrecovered);
     let ded = (dat3[dat3.length-1].totaldeceased);
@@ -147,7 +147,7 @@ async function createTable(){
     state = st
     data2 = await getData()
     for (let [state2, value] of Object.entries(state)){
-        html = `<tr id="${state2}"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id=""></span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
+        html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id=""></span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
         let active = 0;
         let recovered = 0;
         let ded = 0;
@@ -204,7 +204,7 @@ async function createTable(){
 
         document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
         document.getElementById(state2).addEventListener("mouseover",hoverKara)
-        document.getElementById(state2).addEventListener("mouseleave",hoverHataya)
+        document.getElementById(state2).addEventListener("mouseout",hoverHataya)
 
     }
 }
