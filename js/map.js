@@ -133,7 +133,7 @@ for(var i = 0; i<stateIds.length; i++){
 
 async function hoverHataya(s){
    
-    document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
+   document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
 }
 
 
@@ -203,7 +203,7 @@ async function createTable(){
 
 
         document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
-        document.getElementById(state2).addEventListener("mouseover",hoverKara)
+        document.getElementById(state2).addEventListener("onmouseenter",hoverKara)
         document.getElementById(state2).addEventListener("mouseout",hoverHataya)
 
     }
