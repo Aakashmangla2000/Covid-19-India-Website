@@ -9,8 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet"></head>
 </script>
 <body style="background-color: black;">
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     
     <a class="navbar-brand" style="font-size: x-large;" href="#"><img style="width: 45px; height: 45px; filter: invert(100%);" src="svg/logo.png"></img>Covid-19 Tracker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,14 +31,38 @@
       </form>
     </div>
   </nav>
-
   
+ 
+  
+  
+  <div class="container">
+     <!-- <h1>COVID-19 INDIA TRACKER</h1> -->
+     <br><br><br><br>
+     
+     
+     <div class="top-box col-xl">
+        <span class="box font-weight-bold text-danger" style="font-size: 0.9em;">Confirmed 
+           <span class="text-danger"  id="new-val-c" >0</span>
+           <p class="text-danger"  id="total-c" style="font-size: 1.4em;">0</p></span>
+        <span class="box font-weight-bold text-primary" style="font-size: 0.9em;">Active
+         <span class="text-primary"  id="new-val-a" >0</span>
+         <p class="text-primary"  id="total-a" style="font-size: 1.4em;">0</p></span>
+        <span class="box font-weight-bold text-success" style="font-size: 0.9em;">Recovered
+         <span class="text-success"  id="new-val-r" >0</span>
+         <p class="text-success"  id="total-r" style="font-size: 1.4em;">0</p></span>
+        <span class="box font-weight-bold text-secondary" style="font-size: 0.9em;">Deceased
+           <span class="text-secondary"  id="new-val-d" >0</span>
+        <p class="text-secondary"  id="total-d" style="font-size: 1.4em;">0</p></span>
+     </div>
+   
 
 
-   <div class="container">
-         <!-- <h1>COVID-19 INDIA TRACKER</h1> -->
-      <br><br><br><br>
+          
 
+
+
+
+<!-- 
             <div class="row">
                <ul class="list-group list-group-horizontal">
                   <li class="list-group-item list-group-item-danger font-weight-bold">Confirmed <p class="text-danger"  id="new-val-c" style="border: solid 2px; border-radius: 8px;">0</p> <p class="text-danger"  id="total-c">0</p></li>
@@ -48,13 +71,13 @@
                   <li class="list-group-item list-group-item-secondary font-weight-bold">Deceased <p class="text-secondary" id="new-val-d"  style="border: solid 2px; border-radius: 8px;">0</p> <p  class="text-secondary" id="total-d">0</p></li>
                 </ul>
             </div>  
-          
+           -->
        <br>
 
       <div class="row">  
 
          <div class="col">
-            <table id="dtBasicExample" class="table table-hover table-dark table-striped" cellspacing="0" width="100%">
+            <table id="dtBasicExample ttbl" class="table table-hover table-dark table-striped" cellspacing="0" width="100%">
                <thead>
                  <tr>
                    <th class="th-sm">State/UT
@@ -74,14 +97,45 @@
          </div>
            
          <div class="col-xl">
+
+            <h2 id="state-name" class="text-danger">State</h2>
+           
+
+              <div class="top-box1 ">
+                 <span class="box font-weight-bold text-danger bg1" style="font-size: 0.8em;">Confirmed 
+                  
+                  <p class="text-danger"  id="confirmed-cases" style="font-size: 1.4em;">0</p></span>
+                  <span class="box font-weight-bold text-primary bg2" style="font-size: 0.8em;">Active
+                     
+                     <p class="text-primary"  id="active-cases" style="font-size: 1.4em;">0</p></span>
+                     <span class="box font-weight-bold text-success bg3" style="font-size: 0.8em;">Recovered
+                        
+                        <p class="text-success"  id="recovered-cases" style="font-size: 1.4em;">0</p></span>
+                        <span class="box font-weight-bold text-secondary bg4" style="font-size: 0.8em;">Deceased
+                           
+                           <p class="text-secondary"  id="ded-cases" style="font-size: 1.4em;">0</p></span>
+                        </div>
+                    
+                        
+                        
+                        
+
+
+
+
+
+
+
+
+<!-- 
             <h2 id="state-name" class="text-danger">State</h2>
             <br>
             <div class="container"><ul class="list-group list-group-horizontal">
-               <li class="list-group-item list-group-item-danger">Confirmed <p class="text-danger"  id="confirmed-cases">0</p></li>
-               <li class="list-group-item list-group-item-primary">Active <p  class="text-primary" id="active-cases">0</p></li>
-               <li class="list-group-item list-group-item-success">Recovered <p class="text-success"  id="recovered-cases">0</p></li>
-               <li class="list-group-item list-group-item-secondary">Deceased <p  class="text-secondary" id="ded-cases">0</p></li>
-             </ul></div>
+               <li class=" list-group-item-danger">Confirmed <p class="text-danger"  id="confirmed-cases">0</p></li>
+               <li class="list-group-item-primary">Active <p  class="text-primary" id="active-cases">0</p></li>
+               <li class=" list-group-item-success">Recovered <p class="text-success"  id="recovered-cases">0</p></li>
+               <li class="list-group-item-secondary">Deceased <p  class="text-secondary" id="ded-cases">0</p></li>
+             </ul></div> -->
             
             <br>
 
