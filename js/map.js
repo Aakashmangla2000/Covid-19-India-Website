@@ -169,6 +169,7 @@ async function createTable(){
     var data2;
     state = st
     data2 = await getData()
+    var tthtml;
     for (let [state2, value] of Object.entries(state)){
         html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id=""></span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
         let active = 0;
@@ -179,8 +180,8 @@ async function createTable(){
         let d_r = 0;
         let d_d = 0;
 
-        if(state2==='tt')
-        continue;
+        // if(state2==='tt')
+        // continue;
         for (j = 0; j < data2.length; j++){
         if(data2[j].status === 'Confirmed'){
             active += parseInt(data2[j][state2]);
@@ -224,13 +225,17 @@ async function createTable(){
         else
         nhtml = nhtml.replace('%d-d%', "");
 
-
+         if(state2==='tt'){
+         tthtml = nhtml
+         }
+        else{
         document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
      //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
         document.getElementById(state2).addEventListener("mouseout",hoverHataya)
-        document.getElementById(state2).addEventListener("mouseover",hoverKara)
+        document.getElementById(state2).addEventListener("mouseover",hoverKara)}
 
     }
+    document.querySelector('#table-body').insertAdjacentHTML('beforeend',tthtml);
 }
 
 createTable();
@@ -240,7 +245,6 @@ function myFunction() {
   }
   
   function filterFunction() {
-      console.log('hi')
     var input, filter, ul, li, a, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -260,7 +264,6 @@ function test(){
    console.log(document.getElementById('cars').value);
    console.log('hi')
 }
-
 
  
 
