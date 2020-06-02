@@ -31,6 +31,8 @@ body{
       font-size: 5px;
 
     }
+
+    
   }
 }
 .top-box{
@@ -100,6 +102,7 @@ background-color: rgba(0, 17, 255, 0.205);
     width: 80vw;
   }
 
+ 
 }
 
 
@@ -162,3 +165,10 @@ background-color: rgba(0, 17, 255, 0.205);
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+
+
+.box{
+  font-size: 0.9em;
+  margin: 6px;
+}
