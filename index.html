@@ -141,7 +141,7 @@
     <script src="js/Chart.min.js"></script>
     <script src="js/charts.js"></script>
 </head>
-</script>
+<!-- </script> -->
 <body style="background-color: black;">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -428,9 +428,10 @@ function createLineGraph(dat = [], date_data, id, colourScheme, type){
 
     let ctx = document.getElementById(id).getContext('2d');
     let myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: date_data,
+        pointHoverRadius: 20,
         datasets: [{
             label: `Number of ${type} Cases`,
             data: dat,

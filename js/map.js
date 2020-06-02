@@ -116,7 +116,7 @@ async function hoverKara(s){
     changeValues(data,this.id.slice(3,5).toLowerCase())
     else{    
         changeValues(data,this.id)
-        document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "red";
+        document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "ff3333";
        // document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
     }
    // console.log(document.getElementById(`IN-${this.id.toUpperCase()}`))
@@ -131,9 +131,15 @@ for(var i = 0; i<stateIds.length; i++){
  eventLis[i] = (document.getElementById(stateIds[i].id).addEventListener("mouseover", hoverKara))
 }
 
-async function hoverHataya(s){
+function hoverHataya(s){
    
-   document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
+    document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
+    document.getElementById("active-cases").innerText = 0;
+   document.getElementById("confirmed-cases").innerText = 0;
+   document.getElementById("recovered-cases").innerText = 0;
+   document.getElementById("ded-cases").innerText = 0;
+   document.getElementById("state-name").innerText = 'State';
+ // document.getElementById('svg2').style.fill = "rgb(243, 143, 132)";
 }
 
 
@@ -203,8 +209,8 @@ async function createTable(){
 
 
         document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
-        document.getElementById(state2).addEventListener("onmouseenter",hoverKara)
         document.getElementById(state2).addEventListener("mouseout",hoverHataya)
+        document.getElementById(state2).addEventListener("mouseover",hoverKara)
 
     }
 }
