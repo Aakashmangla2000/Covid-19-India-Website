@@ -196,3 +196,7 @@ table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
 bottom: .5em;
 }
+
+.x{
+  color: rgba(255, 255, 255, 0.527);
+}

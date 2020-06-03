@@ -118,14 +118,75 @@ function changeValues(data2, state){
    document.getElementById("recovered-cases").innerText = addComma(recovered);
    document.getElementById("ded-cases").innerText = addComma(ded);
    document.getElementById("state-name").innerText = st[state];
+   document.getElementById("state-name2").innerText = st[state];
+
 }
 
 
 async function hoverKara(s,flag){
    // console.log(document.querySelector(`#${stateIds[1].id}`));
   //  var s = stateIds[eventLis.findIndex()].id.slice(3,5).toLowerCase()
+//   x =  document.getElementById(s)
+//   console.log(s);
+//   x.style.backgroundColor = "rgba(255, 255, 255, 0.177)"
+
+
+arr = [
+    "tt",
+    "an",
+    "ap",
+    "ar",
+    "as",
+    "br",
+    "ch",
+    "ct",
+    "dd",
+    "dl",
+    "dn",
+    "ga",
+    "gj",
+    "hp",
+    "hr",
+    "jh",
+    "jk",
+    "ka",
+    "kl",
+    "la",
+    "ld",
+    "mh",
+    "ml",
+    "mn",
+    "mp",
+    "mz",
+    "nl",
+    "or",
+    "pb",
+    "py",
+    "rj",
+    "sk",
+    "tg",
+    "tn",
+    "tr",
+    "un",
+    "up",
+    "ut",
+    "wb"
+]
+ // console.log(this.id)
+ if(this.id!=undefined){
+    let x = document.querySelectorAll('#scripts')
+    let x2 = document.querySelectorAll('#scripts2')
+    if(this.id.length<3){
+    x[0].selectedIndex = arr.indexOf(this.id)
+    x2[0].selectedIndex = arr.indexOf(this.id)}
+    else{
+        x[0].selectedIndex = arr.indexOf(this.id.slice(3,5).toLowerCase())
+    x2[0].selectedIndex = arr.indexOf(this.id.slice(3,5).toLowerCase())
+    }
+}
+
+   // console.log(this.id,'hi')
     data = await getData()
-    
     if(flag===1){
         changeValues(data,s)
     }
@@ -146,16 +207,25 @@ let s = []
 for(var i = 0; i<stateIds.length; i++){
     s[i] = stateIds[i].id.slice(3,5).toLowerCase()
  eventLis[i] = (document.getElementById(stateIds[i].id).addEventListener("mouseover", hoverKara))
+ 
 }
 
 function hoverHataya(s){
-   
+    let x = document.querySelectorAll('#scripts')
+    let x2 = document.querySelectorAll('#scripts2')
+
+    x[0].selectedIndex = 0
+    x2[0].selectedIndex = 0
+    document.getElementById(this.id).style.backgroundColor = "rgba(1, 1, 44, 0.589)"
+
     document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
     document.getElementById("active-cases").innerText = 0;
    document.getElementById("confirmed-cases").innerText = 0;
    document.getElementById("recovered-cases").innerText = 0;
    document.getElementById("ded-cases").innerText = 0;
    document.getElementById("state-name").innerText = 'State';
+  // document.getElementById("state-name2").innerText = 'State';
+
  // document.getElementById('svg2').style.fill = "rgb(243, 143, 132)";
 }
 
@@ -260,10 +330,7 @@ function myFunction() {
     }
 }
 
-function test(){
-   console.log(document.getElementById('cars').value);
-   console.log('hi')
-}
+
 
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -344,5 +411,4 @@ function myFunct() {
     }
   }
 
-test()
 

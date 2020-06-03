@@ -11,6 +11,16 @@
     <meta property="og:image:height" content="512">
     <meta property="og:url" content="https://aakashmangla2000.github.io/Covid-19-India-Website/" />
     <meta name="title" content="Live Covid-19 Data India">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Covid India">
+    <link rel="apple-touch-startup-image" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png?raw=true">
+    <link rel="apple-touch-icon" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png?raw=true"/>
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png?raw=true">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="196x196" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png?raw=true">
+    <link rel="shortcut icon" sizes="128x128" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png?raw=true">
     <link rel="stylesheet" href="css/svg-stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel='shortcut icon' type='image/x-icon' href='svg/covid.png' />
@@ -77,7 +87,7 @@
 
          <div class="col">
             <div class="table-responsive rounded" >
-            <table id="myTable2" class="rounded table table-sm table-hover table-striped table-bordered" style="background-color: rgba(1, 1, 44, 0.589);" cellspacing="0" width="100%">
+            <table id="myTable2" class="rounded table table-sm table-hover table-striped table-bordered tb2" style="background-color: rgba(1, 1, 44, 0.589);" cellspacing="0" width="100%">
                <thead>
                  <tr>
                    <th class="th-sm" onclick="sortTable(0)">State/UT
@@ -114,7 +124,7 @@
                   <fieldset>                      
                       <p>
                           <select class="custom-select" onchange="selectBox()" style="opacity: 0.3; color: black; width: 100%;" id="scripts" name="scripts">
-                           <option value="TT">All States</option><option value="AN">Andaman and Nicobar Islands</option><option value="AP">Andhra Pradesh</option><option value="AR">Arunachal Pradesh</option><option value="AS">Assam</option><option value="BR">Bihar</option><option value="CH">Chandigarh</option><option value="CT">Chhattisgarh</option><option value="DL">Delhi</option><option value="DN">Dadra and Nagar Haveli and Daman and Diu</option><option value="GA">Goa</option><option value="GJ">Gujarat</option><option value="HP">Himachal Pradesh</option><option value="HR">Haryana</option><option value="JH">Jharkhand</option><option value="JK">Jammu and Kashmir</option><option value="KA">Karnataka</option><option value="KL">Kerala</option><option value="LA">Ladakh</option><option value="LD">Lakshadweep</option><option value="MH">Maharashtra</option><option value="ML">Meghalaya</option><option value="MN">Manipur</option><option value="MP">Madhya Pradesh</option><option value="MZ">Mizoram</option><option value="NL">Nagaland</option><option value="OR">Odisha</option><option value="PB">Punjab</option><option value="PY">Puducherry</option><option value="RJ">Rajasthan</option><option value="SK">Sikkim</option><option value="TG">Telangana</option><option value="TN">Tamil Nadu</option><option value="TR">Tripura</option><option value="UN">Unassigned</option><option value="UP">Uttar Pradesh</option><option value="UT">Uttarakhand</option><option value="WB">West Bengal</option>
+                           <option value="TT">All States</option><option value="AN">Andaman and Nicobar Islands</option><option value="AP">Andhra Pradesh</option><option value="AR">Arunachal Pradesh</option><option value="AS">Assam</option><option value="BR">Bihar</option><option value="CH">Chandigarh</option><option value="CT">Chhattisgarh</option><option value="DD">Daman and Diu</option><option value="DL">Delhi</option><option value="DN">Dadra and Nagar Haveli</option><option value="GA">Goa</option><option value="GJ">Gujarat</option><option value="HP">Himachal Pradesh</option><option value="HR">Haryana</option><option value="JH">Jharkhand</option><option value="JK">Jammu and Kashmir</option><option value="KA">Karnataka</option><option value="KL">Kerala</option><option value="LA">Ladakh</option><option value="LD">Lakshadweep</option><option value="MH">Maharashtra</option><option value="ML">Meghalaya</option><option value="MN">Manipur</option><option value="MP">Madhya Pradesh</option><option value="MZ">Mizoram</option><option value="NL">Nagaland</option><option value="OR">Odisha</option><option value="PB">Punjab</option><option value="PY">Puducherry</option><option value="RJ">Rajasthan</option><option value="SK">Sikkim</option><option value="TG">Telangana</option><option value="TN">Tamil Nadu</option><option value="TR">Tripura</option><option value="UN">Unassigned</option><option value="UP">Uttar Pradesh</option><option value="UT">Uttarakhand</option><option value="WB">West Bengal</option>
                           </select>
                           
                           <!-- <input type="text" size="30" name="display" id="display" /> -->
@@ -316,12 +326,16 @@
       <br>
       <br>
       <div class="row">
-         <h2 class="col-12 text-primary text-center">Graphs are interactive</h2>
+         <h1 class="col-12 text-primary text-center">Graphs are interactive</h1>
          <!-- <button type="button" class="col btn btn-outline-primary">Primary</button> -->
-
+           
         </div>
      
-
+        <h2 id="state-name2" class="text-danger text-center">State</h2>
+        <select class="custom-select" onchange="selectBox2()" style="opacity: 0.3; color: black; width: 100%;" id="scripts2" name="scripts">
+         <option value="TT">All States</option><option value="AN">Andaman and Nicobar Islands</option><option value="AP">Andhra Pradesh</option><option value="AR">Arunachal Pradesh</option><option value="AS">Assam</option><option value="BR">Bihar</option><option value="CH">Chandigarh</option><option value="CT">Chhattisgarh</option><option value="DD">Daman and Diu</option> <option value="DL">Delhi</option><option value="DN">Dadra and Nagar Haveli and Daman and Diu</option><option value="GA">Goa</option><option value="GJ">Gujarat</option><option value="HP">Himachal Pradesh</option><option value="HR">Haryana</option><option value="JH">Jharkhand</option><option value="JK">Jammu and Kashmir</option><option value="KA">Karnataka</option><option value="KL">Kerala</option><option value="LA">Ladakh</option><option value="LD">Lakshadweep</option><option value="MH">Maharashtra</option><option value="ML">Meghalaya</option><option value="MN">Manipur</option><option value="MP">Madhya Pradesh</option><option value="MZ">Mizoram</option><option value="NL">Nagaland</option><option value="OR">Odisha</option><option value="PB">Punjab</option><option value="PY">Puducherry</option><option value="RJ">Rajasthan</option><option value="SK">Sikkim</option><option value="TG">Telangana</option><option value="TN">Tamil Nadu</option><option value="TR">Tripura</option><option value="UN">Unassigned</option><option value="UP">Uttar Pradesh</option><option value="UT">Uttarakhand</option><option value="WB">West Bengal</option>
+        </select>
+        <br><br>
       <div>
          
          <canvas id="myChart" width="200" height="200"></canvas><br>
@@ -331,8 +345,8 @@
        </div>
        <div class="row">
          <button type="button" class="col btn btn-outline-primary" style="margin-left: 10px;" onclick="setFlag(1)">Cumulative</button>
-         <button type="button" class="col btn btn-outline-primary" onclick="setFlag(0)">Daily</button>
-         <button class="col btn btn-outline-primary" id="btn-2" onclick="resetFunc()" style=" margin-right: 10px;">Reset</button>
+         <button type="button" class="col btn btn-outline-primary" style="margin-right: 10px;" onclick="setFlag(0)">Daily</button>
+         <!-- <button class="col btn btn-outline-primary" id="btn-2" onclick="resetFunc()" style=" margin-right: 10px;">Reset</button> -->
       </div>
        
 
@@ -378,11 +392,14 @@ function createLineGraph(dat, date_data, id, colourScheme, type, x=0){
     else{
     var ctx = document.getElementById(id).getContext('2d');
     myChart.push(new Chart(ctx, {
+      // title:{
+      //  text:'Index Labels Customizations'   
+      // }, 
     type: 'line',
     data: {
         labels: date_data,
         datasets: [{
-            label: `Number of ${type} Cases`,
+            label: `${type} Cases`,
             data: dat[0],
             backgroundColor: 
                // colourScheme
@@ -396,7 +413,7 @@ function createLineGraph(dat, date_data, id, colourScheme, type, x=0){
 
         },
         {
-            label: `Number of Active Cases`,
+            label: `Active Cases`,
             data: dat[1],
             backgroundColor: 
                // colourScheme
@@ -410,7 +427,7 @@ function createLineGraph(dat, date_data, id, colourScheme, type, x=0){
 
         },
         {
-            label: `Number of Recovered Cases`,
+            label: `Recovered Cases`,
             data: dat[2],
             backgroundColor: 
                // colourScheme
@@ -424,7 +441,7 @@ function createLineGraph(dat, date_data, id, colourScheme, type, x=0){
 
         },
         {
-            label: `Number of Deceased Cases`,
+            label: `Deceased Cases`,
             data: dat[3],
             backgroundColor: 
                // colourScheme
@@ -559,6 +576,7 @@ async function hoverH(s){
    //  createTotalGraph('myChart2','ta',colr[1],'Active',1);
    //  createTotalGraph('myChart3','tr',colr[2],'Recovered',2);
    //  createTotalGraph('myChart4','td',colr[3],'Deceased',3);
+  // console.log(s)
    if(s===1)
    hoverK('tt',1)
    else
@@ -567,6 +585,11 @@ async function hoverH(s){
 }
 var unId = 'tt' ;
 async function hoverK(s,flag){
+  // console.log(s)
+  // document.getElementById(s.id).style.backgroundColor = "rgba(255, 255, 255, 0.177)"
+
+    var sel = document.getElementById('scripts');
+    let a = (sel.options[sel.selectedIndex].value).toLowerCase();
 
     let idd = 0;
     if(flag===1)
@@ -650,8 +673,24 @@ async function hoverK(s,flag){
 // });
 
 function selectBox() {
-    
+   let x = document.querySelectorAll('#scripts2')
+
     var sel = document.getElementById('scripts');
+    x[0].selectedIndex = sel.selectedIndex
+
+    console.log(sel.selectedIndex)
+    //sel.selectedIndex = 0;  
+    let a = (sel.options[sel.selectedIndex].value).toLowerCase();
+        hoverK(a,1)   
+        hoverKara(a,1)   
+}
+function selectBox2() {
+   let x = document.querySelectorAll('#scripts')
+
+    var sel = document.getElementById('scripts2');
+   // x[0].selectedIndex = sel.selectedIndex
+   x[0].selectedIndex = sel.selectedIndex
+
     let a = (sel.options[sel.selectedIndex].value).toLowerCase();
         hoverK(a,1)   
         hoverKara(a,1)   
