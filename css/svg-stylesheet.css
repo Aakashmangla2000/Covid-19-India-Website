@@ -13,7 +13,7 @@ body{
 }
 
 *{
-    color: wheat;
+    color: rgb(150, 150, 150);
     
 }
 
@@ -171,4 +171,28 @@ background-color: rgba(0, 17, 255, 0.205);
 .box{
   font-size: 0.9em;
   margin: 6px;
+}
+
+table.table-bordered{
+  border:2px solid rgba(255, 255, 255, 0.103);
+  margin-top:20px;
+}
+table.table-bordered > thead > tr > th{
+  border:2px solid rgba(255, 255, 255, 0.103);
+}
+table.table-bordered > tbody > tr > td{
+  border:2px solid rgba(255, 255, 255, 0.103);
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
 }

@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 India Tracker</title>
+    <meta name="description" content="A volunteer-driven crowdsourced effort to track the coronavirus in India. A detailed country map shows the extent of the coronavirus outbreak, with tables of the number of cases by state and district."><meta name="title" content="Coronavirus Outbreak in India: Latest Map and Case Count">
     <link rel="stylesheet" href="css/svg-stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel='shortcut icon' type='image/x-icon' href='svg/covid.png' />
-    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>    
+    
     <script src="js/Chart.min.js"></script>
     <script src="js/charts.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
    </head>
 <!-- </script> -->
 
-<body style="background-color: black;">
+<body style="background-color: rgb(0, 0, 31); font-family: 'Oxygen', sans-serif;">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     
     <a class="navbar-brand" style="font-size: x-large;" href="#"><img style="width: 45px; height: 45px; filter: invert(100%);" src="svg/logo.png"></img>Covid-19 Tracker</a>
@@ -26,12 +36,11 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="news.html">News</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0 text-light text-success" type="submit">Search</button>
+
       </form>
     </div>
   </nav>
@@ -47,17 +56,17 @@
      </div> -->
      <div class="top-box col-xl">
       <span class="box t-box font-weight-bold text-danger">Confirmed 
-         <span class="text-danger" id="new-val-c">[↑8,812]</span>
-         <p class="text-danger box-num" id="total-c" style="font-size: 1.3em;">2,07,184</p></span>
+         <span class="text-danger"  style="opacity: 0.6; font-size: 0.8em;" id="new-val-c">[↑8,812]</span>
+         <p class="text-danger box-num" id="total-c" style="font-size: 1.2em;">2,07,184</p></span>
       <span class="box font-weight-bold text-primary">Active
-       <span class="text-primary" id="new-val-a">[↑4,060]</span>
-       <p class="text-primary box-num" id="total-a" style="font-size: 1.3em;">1,01,071</p></span>
+       <span class="text-primary" style="opacity: 0.6; font-size: 0.8em;" id="new-val-a">[↑4,060]</span>
+       <p class="text-primary box-num" id="total-a" style="font-size: 1.2em;">1,01,071</p></span>
       <span class="box font-weight-bold text-success">Recovered
-       <span class="text-success" id="new-val-r">[↑4,531]</span>
-       <p class="text-success box-num" id="total-r" style="font-size: 1.3em;">1,00,285</p></span>
+       <span class="text-success" style="opacity: 0.6; font-size: 0.8em;" id="new-val-r">[↑4,531]</span>
+       <p class="text-success box-num" id="total-r" style="font-size: 1.2em;">1,00,285</p></span>
       <span class="box font-weight-bold text-secondary">Deceased
-         <span class="text-secondary" id="new-val-d">[↑221]</span>
-      <p class="text-secondary box-num" id="total-d" style="font-size: 1.3em;">5,828</p></span>
+         <span class="text-secondary" style="opacity: 0.6; font-size: 0.8em;" id="new-val-d">[↑221]</span>
+      <p class="text-secondary box-num" id="total-d" style="font-size: 1.2em;">5,828</p></span>
    </div>
    
 
@@ -66,19 +75,19 @@
       <div class="row">  
 
          <div class="col">
-            <div class="table-responsive">
-            <table id="dtBasicExample ttbl" class="table table-hover table-dark table-striped" cellspacing="0" width="100%">
+            <div class="table-responsive rounded" >
+            <table id="myTable2" class="rounded table table-sm table-hover table-striped table-bordered" style="background-color: rgba(1, 1, 44, 0.589);" cellspacing="0" width="100%">
                <thead>
                  <tr>
-                   <th class="th-sm">State/UT
+                   <th class="th-sm" onclick="sortTable(0)">State/UT
                    </th>
-                   <th class="th-sm">C
+                   <th class="th-sm" onclick="">C
                    </th>
-                   <th class="th-sm">A
+                   <th class="th-sm" onclick="">A
                    </th>
-                   <th class="th-sm">R
+                   <th class="th-sm" onclick="">R
                    </th>
-                   <th class="th-sm">D
+                   <th class="th-sm" onclick="">D
                    </th>
                  </tr>
                </thead>
@@ -94,7 +103,7 @@
                       
             <!-- </div> -->
             <h2 id="state-name" class="text-danger text-center">State</h2>
-            <p class="text-center">Hover over states to view their data</p>
+            <p class="text-center">Hover over states to view their data and graphs</p>
 
 
                <form action="#" method="post" id="demoForm" class="demoForm">
@@ -337,7 +346,6 @@ var flg = 1;
 function setFlag(s,d){
    flg = s;
   // resetFunc()
-  console.log('hi')
    hoverK('d',5)
 }
 
@@ -460,7 +468,6 @@ function createLineGraph(dat, date_data, id, colourScheme, type, x=0){
 }
 
 function addData(chart,label,data) {
-   console.log(chart)
         chart.data.datasets[0].data = data[0];
         chart.data.datasets[1].data = data[1];
         chart.data.datasets[2].data = data[2];
@@ -528,9 +535,7 @@ async function createTotalGraph(id,t,cl,tp,y){
     function resetFunc(){
       hoverH(1)
 }
-   //  createTotalGraph('myChart2','ta',colr[1],'Active',5);
-   //  createTotalGraph('myChart3','tr',colr[2],'Recovered',5);
-   //  createTotalGraph('myChart4','td',colr[3],'Deceased',5);
+
 
 
 async function hoverH(s){
@@ -571,8 +576,6 @@ async function hoverK(s,flag){
     }
     else
     idd = s.id;
-
-    console.log(idd)
 
     let d = 0;
     d2 = await getD('https://api.covid19india.org/states_daily.json');
@@ -627,73 +630,30 @@ async function hoverK(s,flag){
     for(let i = 0; i < dat.length;i++){
         dat4.push(dat[i]-dat2[i]-dat3[i])
     }
-    console.log(des)
 
-    des[0] = dat
+   des[0] = dat
    des[1] = dat4
    des[2] = dat2
    des[3] = dat3
        addData(createLineGraph(dat,dts,'myChart2',colr[0],'Confirmed',1)[0],'ok',des);
-      //  addData(createLineGraph(dat4,dts,'myChart2',colr[0],'Confirmed',1)[1],'ok',dat4);
-      //  addData(createLineGraph(dat2,dts,'myChart2',colr[0],'Confirmed',1)[2],'ok',dat2);
-      //  addData(createLineGraph(dat3,dts,'myChart2',colr[0],'Confirmed',1)[3],'ok',dat3);
+
       unId = idd;
 
 }
 
-// async function getap(){
-//    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-//    let url = 'http://newsapi.org/v2/top-headlines?country=in&apiKey=73612192f06e4bf0a5663326c228d59f'
-//    let data = await fetch(proxyurl+ url)
-//    let data2 = data.json()
-//    console.log(data2)
-// }
-// getap()
+// $(document).ready(function () {
+// $('#dtBasicExample').DataTable();
+// $('.dataTables_length').addClass('bs-select');
+// });
 
 function selectBox() {
     
-    // get references to select list and display text box
     var sel = document.getElementById('scripts');
-   // var el = document.getElementById('display');
     let a = (sel.options[sel.selectedIndex].value).toLowerCase();
-
-   //  function getSelectedOption(sel) {
-   //      var opt;
-   //      for ( var i = 0, len = sel.options.length; i < len; i++ ) {
-   //          opt = sel.options[i];
-   //          if ( opt.selected === true ) {
-   //              break;
-   //          }
-   //      }
-   //      return opt;
-   //  }
-
-   //  // assign onclick handlers to the buttons
-   //  document.getElementById('showVal').onclick = function () {
-   //     // el.value = sel.value; 
-   //     var a = sel.value.toLowerCase()
         hoverK(a,1)   
         hoverKara(a,1)   
-        // hoverKara()
-   //  }
-    
-    // document.getElementById('showTxt').onclick = function () {
-    //     // access text property of selected option
-    //     el.value = sel.options[sel.selectedIndex].text;
-    // }
-
-    // document.getElementById('doLoop').onclick = function () {
-    //     var opt = getSelectedOption(sel);
-    //     el.value = opt.value;
-    // }
-    
 }
 
-</script>
 
-<script src="js/map.js"></script>
-<script src="js/bootstrap.bundle.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</script>
 </html>
