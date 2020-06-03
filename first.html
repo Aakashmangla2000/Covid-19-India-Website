@@ -46,19 +46,19 @@
       <iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:450px;height:270px;"src="https://www.clocklink.com/html5embed.php?clock=048&timezone=GMT0530&color=black&size=450&Title=&Message=&Target=&From=2020,1,1,0,0,0&Color=blue"></iframe>  
      </div> -->
      <div class="top-box col-xl">
-        <span class="box t-box font-weight-bold text-danger" >Confirmed 
-           <span class="text-danger"  id="new-val-c" >0</span>
-           <p class="text-danger box-num"  id="total-c" style="font-size: 1.3em;">0</p></span>
-        <span class="box font-weight-bold text-primary" >Active
-         <span class="text-primary"  id="new-val-a" >0</span>
-         <p class="text-primary box-num"  id="total-a" style="font-size: 1.3em;">0</p></span>
-        <span class="box font-weight-bold text-success" >Recovered
-         <span class="text-success"  id="new-val-r" >0</span>
-         <p class="text-success box-num"  id="total-r" style="font-size: 1.3em;">0</p></span>
-        <span class="box font-weight-bold text-secondary" >Deceased
-           <span class="text-secondary"  id="new-val-d" >0</span>
-        <p class="text-secondary box-num"  id="total-d" style="font-size: 1.3em;">0</p></span>
-     </div>
+      <span class="box t-box font-weight-bold text-danger">Confirmed 
+         <span class="text-danger" id="new-val-c">[↑8,812]</span>
+         <p class="text-danger box-num" id="total-c" style="font-size: 1.3em;">2,07,184</p></span>
+      <span class="box font-weight-bold text-primary">Active
+       <span class="text-primary" id="new-val-a">[↑4,060]</span>
+       <p class="text-primary box-num" id="total-a" style="font-size: 1.3em;">1,01,071</p></span>
+      <span class="box font-weight-bold text-success">Recovered
+       <span class="text-success" id="new-val-r">[↑4,531]</span>
+       <p class="text-success box-num" id="total-r" style="font-size: 1.3em;">1,00,285</p></span>
+      <span class="box font-weight-bold text-secondary">Deceased
+         <span class="text-secondary" id="new-val-d">[↑221]</span>
+      <p class="text-secondary box-num" id="total-d" style="font-size: 1.3em;">5,828</p></span>
+   </div>
    
 
        <br>
@@ -458,10 +458,10 @@ async function hoverH(s){
    document.getElementById("ded-cases").innerText = addComma(ded);
    document.getElementById("state-name").innerText = 'Total';
 
-    createTotalGraph('myChart','tc',colr[0],'Confirmed',0);
-    createTotalGraph('myChart2','ta',colr[1],'Active',1);
-    createTotalGraph('myChart3','tr',colr[2],'Recovered',2);
-    createTotalGraph('myChart4','td',colr[3],'Deceased',3);
+   //  createTotalGraph('myChart','tc',colr[0],'Confirmed',0);
+   //  createTotalGraph('myChart2','ta',colr[1],'Active',1);
+   //  createTotalGraph('myChart3','tr',colr[2],'Recovered',2);
+   //  createTotalGraph('myChart4','td',colr[3],'Deceased',3);
    document.getElementById(`${s}`).style.fill = "rgb(243, 143, 132)";
 
 }

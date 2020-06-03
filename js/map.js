@@ -169,6 +169,7 @@ async function createTable(){
     var data2;
     state = st
     data2 = await getData()
+    var tthtml;
     for (let [state2, value] of Object.entries(state)){
         html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id=""></span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
         let active = 0;
@@ -179,8 +180,8 @@ async function createTable(){
         let d_r = 0;
         let d_d = 0;
 
-        if(state2==='tt')
-        continue;
+        // if(state2==='tt')
+        // continue;
         for (j = 0; j < data2.length; j++){
         if(data2[j].status === 'Confirmed'){
             active += parseInt(data2[j][state2]);
@@ -224,13 +225,17 @@ async function createTable(){
         else
         nhtml = nhtml.replace('%d-d%', "");
 
-
+         if(state2==='tt'){
+         tthtml = nhtml
+         }
+        else{
         document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
      //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
         document.getElementById(state2).addEventListener("mouseout",hoverHataya)
-        document.getElementById(state2).addEventListener("mouseover",hoverKara)
+        document.getElementById(state2).addEventListener("mouseover",hoverKara)}
 
     }
+   // document.querySelector('#table-body').insertAdjacentHTML('beforeend',tthtml);
 }
 
 createTable();
@@ -240,7 +245,6 @@ function myFunction() {
   }
   
   function filterFunction() {
-      console.log('hi')
     var input, filter, ul, li, a, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -261,8 +265,84 @@ function test(){
    console.log('hi')
 }
 
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable2");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+        shouldSwitch = true;
+        break;
+      }
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+} 
 
- 
+function myFunct() {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+  
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
 
 test()
 
