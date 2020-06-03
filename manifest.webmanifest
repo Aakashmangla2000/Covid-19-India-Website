@@ -1,0 +1,15 @@
+{
+    "background_color": "white",
+    "description": "Daily corona virus cases data, state wise for India displayed through maps and charts. The Case count is updated daily. With latest updated news about Covid-19 in India",
+    "display": "fullscreen",
+    "icons": [
+      {
+        "src": "svg/logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "name": "Covid India Tracker",
+    "short_name": "Covid India",
+    "start_url": "index.html"
+  }
