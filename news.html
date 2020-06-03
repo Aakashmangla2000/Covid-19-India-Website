@@ -68,8 +68,6 @@
       <!-- </div> -->
  </div>
 
-
-    
     
 </body>
 <script>
@@ -95,9 +93,7 @@
      let result=await fetch(url)
      let data=await result.json()
     let data2= data.response.docs
-    console.log(data2)
     for (let i=0;i<10;i++){
-        console.log(data2[i])
         let html=`<li class="news-bullets"><h3 class="text-white">%h%</h3><span style="color:rgb(150, 150, 150, 0.6);">%s%</span><br><br><p>%p%</p><a href="%l%" class="text-primary">Read complete story</a><br><br><br><br></li>`
         // document.getElementById()
         nhtml=html.replace('%h%',data2[i].headline.main)
@@ -127,7 +123,31 @@
       }
     }
   }
-    ret()
+   // ret()
+
+    async function getIn(){
+      let result = await fetch('https://cors-anywhere.herokuapp.com/https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms?feedtype=sjson');
+     
+       // document.querySelector('.news').insertAdjacentHTML('beforeend',nhtml)
+      let data = await result.json();
+
+      let html=`<li class="news-bullets"><h3 class="text-white">%h%</h3><br><p>%p%</p><a href="%l%" class="text-primary">Read complete story</a><br><br><br><br></li>`
+      
+        for(let i = 0; i < 20; i++){
+
+          let html2 = data.channel.item[0].description
+                let x = html2.search("</a>")
+                let nhtml2 = html2.slice(x+4,html2.length)
+
+                nhtml=html.replace('%h%',data.channel.item[i].title)
+                nhtml=nhtml.replace('%p%',nhtml2)
+                nhtml=nhtml.replace('%l%',data.channel.item[i].link)
+                document.getElementById('myUL').insertAdjacentHTML("beforeend",nhtml)
+
+             }
+                console.log(nhtml2)
+    }
+    getIn()
 </script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
