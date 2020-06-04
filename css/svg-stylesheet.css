@@ -1,136 +1,136 @@
 .state-stroke:hover{
-    fill: #ff3333;
+  fill: #ff3333;
 }
 
 #svg2{
-    fill: rgb(243, 143, 132);
-    stroke: white;
+  fill: rgb(243, 143, 132);
+  stroke: white;
 }
 
 body{
-    background-color: rgb(0, 0, 0);
-    width: 100vw;
+  background-color: rgb(0, 0, 0);
+  width: 100vw;
 }
 
 *{
-    color: rgb(150, 150, 150);
-    
+  color: rgb(150, 150, 150);
+  
 }
 
 .text-1{
-    /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+  /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
 @media screen and (min-width: 601px) {
-    div.example {
-      font-size: 5px;
-    }
-  }
-  
-  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-  @media screen and (max-width: 600px) {
-    div.example {
-      font-size: 5px;
-
-    }
-
-    
+  div.example {
+    font-size: 5px;
   }
 }
-.top-box{
-  display: flex;
-  width: 88vw;
-  height: 20vh;
-  /* border: 2px solid red; */
-  justify-content: space-evenly;
-  align-items: center;
-  overflow: visible;
-  /* position: absolute; */
-  margin: 0px;
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  div.example {
+    font-size: 5px;
+
+  }
+
   
+}
+}
+.top-box{
+display: flex;
+width: 88vw;
+height: 20vh;
+/* border: 2px solid red; */
+justify-content: space-evenly;
+align-items: center;
+overflow: visible;
+/* position: absolute; */
+margin: 0px;
+
 }
 
 .box{
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  /* border: 2px solid red; */
-  height: 20vh;
-  width: 20vw;
-  flex-shrink: 1;
-  padding: 2px;
-  
-  box-sizing: 76;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+flex-direction: column;
+/* border: 2px solid red; */
+height: 20vh;
+width: 20vw;
+flex-shrink: 1;
+padding: 2px;
+
+box-sizing: 76;
 }
 
 
 .top-box1{
-  display: flex;
-  width: 44vw;
-  height: 20vh;
-  /* border: 2px solid red; */
-  justify-content: space-evenly;
-  align-items: center;
-  overflow: visible;
-  /* position: absolute; */
-  margin: 0px;
+display: flex;
+width: 44vw;
+height: 20vh;
+/* border: 2px solid red; */
+justify-content: space-evenly;
+align-items: center;
+overflow: visible;
+/* position: absolute; */
+margin: 0px;
 
-  
-  
+
+
 }
 
 .bg1{
-  background-color: rgba(255, 0, 0, 0.267);
+background-color: rgba(255, 0, 0, 0.267);
 }
 .bg2{
 background-color: rgba(0, 17, 255, 0.205);
 
 }
 .bg3{
-  background-color: rgba(0, 255, 0, 0.205);
+background-color: rgba(0, 255, 0, 0.205);
 }
 .bg4{
-  background-color: rgba(77, 77, 77, 0.205);
+background-color: rgba(77, 77, 77, 0.205);
 }
 
 @media screen and (max-width:780px)
 {
-  .top-box1{
-    width: 80vw;
-    margin-left: 10px;
-  }
-  #ttbl{
-    width: 80vw;
-  }
+.top-box1{
+  width: 80vw;
+  margin-left: 10px;
+}
+#ttbl{
+  width: 80vw;
+}
 
- 
+
 }
 
 
 /* Dropdown Button */
 .dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
+background-color: #4CAF50;
+color: white;
+padding: 16px;
+font-size: 16px;
+border: none;
+cursor: pointer;
 }
 
 /* Dropdown button on hover & focus */
 .dropbtn:hover, .dropbtn:focus {
-  background-color: #3e8e41;
+background-color: #3e8e41;
 }
 
 /* The search field */
 #myInput {
-  box-sizing: border-box;
-  background-image: url('searchicon.png');
-  background-position: 14px 12px;
-  background-repeat: no-repeat;
-  font-size: 16px;
-  padding: 14px 20px 12px 45px;
-  border: none;
-  border-bottom: 1px solid #ddd;
+box-sizing: border-box;
+background-image: url('searchicon.png');
+background-position: 14px 12px;
+background-repeat: no-repeat;
+font-size: 16px;
+padding: 14px 20px 12px 45px;
+border: none;
+border-bottom: 1px solid #ddd;
 }
 
 /* The search field when it gets focus/clicked on */
@@ -138,26 +138,26 @@ background-color: rgba(0, 17, 255, 0.205);
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-  position: relative;
-  display: inline-block;
+position: relative;
+display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  border: 1px solid #ddd;
-  z-index: 1;
+display: none;
+position: absolute;
+background-color: #f6f6f6;
+min-width: 230px;
+border: 1px solid #ddd;
+z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content button {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
 }
 
 /* Change color of dropdown links on hover */
@@ -169,19 +169,19 @@ background-color: rgba(0, 17, 255, 0.205);
 
 
 .box{
-  font-size: 0.9em;
-  margin: 6px;
+font-size: 0.9em;
+margin: 6px;
 }
 
 table.table-bordered{
-  border:2px solid rgba(255, 255, 255, 0.103);
-  margin-top:20px;
+border:2px solid rgba(255, 255, 255, 0.103);
+margin-top:20px;
 }
 table.table-bordered > thead > tr > th{
-  border:2px solid rgba(255, 255, 255, 0.103);
+border:2px solid rgba(255, 255, 255, 0.103);
 }
 table.table-bordered > tbody > tr > td{
-  border:2px solid rgba(255, 255, 255, 0.103);
+border:2px solid rgba(255, 255, 255, 0.103);
 }
 
 table.dataTable thead .sorting:after,
@@ -198,5 +198,10 @@ bottom: .5em;
 }
 
 .x{
-  color: rgba(255, 255, 255, 0.527);
+color: rgba(255, 255, 255, 0.527);
+}
+
+.th-sm{
+  background-color: rgba(255, 255, 255, 0.377);
+  color: rgba(0, 0, 0, 0.603);
 }
