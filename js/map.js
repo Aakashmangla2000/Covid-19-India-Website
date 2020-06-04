@@ -124,12 +124,7 @@ function changeValues(data2, state){
 
 
 async function hoverKara(s,flag){
-   // console.log(document.querySelector(`#${stateIds[1].id}`));
-  //  var s = stateIds[eventLis.findIndex()].id.slice(3,5).toLowerCase()
-//   x =  document.getElementById(s)
-//   console.log(s);
-//   x.style.backgroundColor = "rgba(255, 255, 255, 0.177)"
-
+  
 
 arr = [
     "tt",
@@ -198,6 +193,12 @@ arr = [
        // document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
     }
    // console.log(document.getElementById(`IN-${this.id.toUpperCase()}`))
+  // console.log(document.querySelector(`#${stateIds[1].id}`));
+   var s = this.id
+  x =  document.getElementById(s)
+  console.log(s);
+  x.style.backgroundColor = "rgba(255, 255, 255, 0.177)"
+
 }
 
 stateIds = document.getElementsByTagName("path")
@@ -217,6 +218,10 @@ function hoverHataya(s){
     x[0].selectedIndex = 0
     x2[0].selectedIndex = 0
     document.getElementById(this.id).style.backgroundColor = "rgba(1, 1, 44, 0.589)"
+    var s = this.id
+  x =  document.getElementById(s)
+  console.log(s);
+  x.style.backgroundColor = "rgb(0, 0, 31)"
 
     document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 143, 132)";
     document.getElementById("active-cases").innerText = 0;
