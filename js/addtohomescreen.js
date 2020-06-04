@@ -174,9 +174,9 @@ ath.defaults = {
 	mandatory: false,			// you can't proceed if you don't add the app to the homescreen
 	autostart: true,			// show the message automatically
 	skipFirstVisit: false,		// show only to returning visitors (ie: skip the first time you visit)
-	startDelay: 1,				// display the message after that many seconds from page load
-	lifespan: 15,				// life of the message in seconds
-	displayPace: 1440,			// minutes before the message is shown again (0: display every time, default 24 hours)
+	startDelay: 0,				// display the message after that many seconds from page load
+	lifespan: 20,				// life of the message in seconds
+	displayPace: 0,			// minutes before the message is shown again (0: display every time, default 24 hours)
 	maxDisplayCount: 0,			// absolute maximum number of times the message will be shown to the user (0: no limit)
 	icon: true,					// add touch icon to the message
 	message: '',				// the message can be customized
@@ -186,7 +186,7 @@ ath.defaults = {
 	onRemove: null,				// executed when the message is removed
 	onAdd: null,				// when the application is launched the first time from the homescreen (guesstimate)
 	onPrivate: null,			// executed if user is in private mode
-	privateModeOverride: false,	// show the message even in private mode (very rude)
+	privateModeOverride: true,	// show the message even in private mode (very rude)
 	detectHomescreen: false		// try to detect if the site has been added to the homescreen (false | true | 'hash' | 'queryString' | 'smartURL')
 };
 
@@ -389,7 +389,7 @@ ath.Class = function (options) {
 
 	// check if this is a returning visitor
 	if ( !this.session.returningVisitor ) {
-		this.session.returningVisitor = true;
+		this.session.returningVisitor = false;
 		this.updateSession();
 
 		// we do not show the message if this is your first visit
