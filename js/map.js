@@ -124,7 +124,9 @@ function changeValues(data2, state){
 
 
 async function hoverKara(s,flag){
-  
+  console.log(s)
+  let sa = this.id
+
 
 arr = [
     "tt",
@@ -194,9 +196,8 @@ arr = [
     }
    // console.log(document.getElementById(`IN-${this.id.toUpperCase()}`))
   // console.log(document.querySelector(`#${stateIds[1].id}`));
-   var s = this.id
-  x =  document.getElementById(s)
-  console.log(s);
+  x =  document.getElementById(sa)
+  console.log(sa);
   x.style.backgroundColor = "rgba(255, 255, 255, 0.177)"
 
 }
