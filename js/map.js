@@ -437,8 +437,11 @@ let result2 = await fetch(`https://api.covid19india.org/data.json`)
   let dat2 = await dat.cases_time_series;
   cases_time_series = await dat2;
 // console.log(cases_time_series)
+updateData()
+
 createTable();
 createTotalGraph('myChart','tc',colr,'Confirmed',5);
+
 
 }
 
@@ -455,6 +458,8 @@ function runApp(){
 
 
 function updateData(){
+  console.log('test')
+
 //   let dat = await fetch(`https://api.covid19india.org/data.json`)
 //   let dat2 = await dat.json()
 let dat3 = cases_time_series;
@@ -486,7 +491,6 @@ document.getElementById("new-val-r").innerText = "[↑" + addComma(nrecovered) +
 document.getElementById("new-val-d").innerText = "[↑" + addComma(nded)  + ']';
 }
 
-updateData()
 
 
 
