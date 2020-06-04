@@ -661,7 +661,7 @@ state = st
 data2 = states_daily
 var tthtml;
 for (let [state2, value] of Object.entries(state)){
-    html = `<tr id="${state2}" onmouseover="hoverK(${state2})"  class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id=""></span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
+    html = `<tr id="${state2}" onmouseover="hoverK(${state2})"  class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
     let active = 0;
     let recovered = 0;
     let ded = 0;
@@ -700,8 +700,11 @@ d_d = data2[data2.length-1][state2];
     else
     nhtml = nhtml.replace('%d-c%', ""); + ""
     
-    if((d_c-d_r-d_d)!=0)
+    if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)>=0)
     nhtml = nhtml.replace('%d-a%', "↑" + (d_c-d_r-d_d) + "");
+    else if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)<=0)
+    nhtml = nhtml.replace('%d-a%', "↓" + -(d_c-d_r-d_d) + "");
+
     else
     nhtml = nhtml.replace('%d-a%', "");
 
@@ -765,27 +768,43 @@ switching = false;
 rows = table.rows;
 /* Loop through all table rows (except the
 first, which contains table headers): */
+// let xx,yy;
+
 for (i = 1; i < (rows.length - 1); i++) {
   // Start by saying there should be no switching:
   shouldSwitch = false;
   /* Get the two elements you want to compare,
   one from current row and one from the next: */
   x = rows[i].getElementsByTagName("TD")[n];
+  //console.log(x.innerHTML[0])
   y = rows[i + 1].getElementsByTagName("TD")[n];
   /* Check if the two rows should switch place,
   based on the direction, asc or desc: */
-  if (Number(x.innerHTML) > Number(y.innerHTML)) {
+  //   if(x.innerHTML[0]==='<'){
+  //   let ser = x.innerHTML.search('n> ')
+  //   xx = x.innerHTML.slice(ser+3,ser.length).replace(",","")
+  //  // xx = xx.replace(",","")
+  //   let ser2 = y.innerHTML.search('n> ')
+  //   yy = y.innerHTML.slice(ser2+3,ser2.length)
+  //  // yy = yy.replace(",",'')
+  //   //console.log(xx,yy)
+  // }
+  // else{
+  xx = x.innerHTML;
+  yy = y.innerHTML;
+  
+  if (Number(xx) > Number(yy)) {
     shouldSwitch = true;
     break;
   }
   if (dir == "asc") {
-    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+    if (xx.toLowerCase() > yy.toLowerCase()) {
       // If so, mark as a switch and break the loop:
       shouldSwitch = true;
       break;
     }
   } else if (dir == "desc") {
-    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+    if (xx.toLowerCase() < yy.toLowerCase()) {
       // If so, mark as a switch and break the loop:
       shouldSwitch = true;
       break;
