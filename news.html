@@ -130,22 +130,23 @@
      
        // document.querySelector('.news').insertAdjacentHTML('beforeend',nhtml)
       let data = await result.json();
-
+      console.log(data)
       let html=`<li class="news-bullets"><h3 class="text-white">%h%</h3><br><p>%p%</p><a href="%l%" class="text-primary">Read complete story</a><br><br><br><br></li>`
       
-        for(let i = 0; i < 20; i++){
+        for(let i = 0; i < data.channel.item.length; i++){
 
-          let html2 = data.channel.item[0].description
+          let html2 = data.channel.item[i].description
                 let x = html2.search("</a>")
                 let nhtml2 = html2.slice(x+4,html2.length)
 
                 nhtml=html.replace('%h%',data.channel.item[i].title)
+                
                 nhtml=nhtml.replace('%p%',nhtml2)
                 nhtml=nhtml.replace('%l%',data.channel.item[i].link)
                 document.getElementById('myUL').insertAdjacentHTML("beforeend",nhtml)
 
              }
-                console.log(nhtml2)
+              //  console.log(nhtml2)
     }
     getIn()
 </script>
