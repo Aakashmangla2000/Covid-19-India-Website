@@ -223,7 +223,7 @@ function createTotalGraph(id,t,cl,tp,y){
 
 
 function hoverH(s){
- let x = document.querySelectorAll('#scripts')
+ //let x = document.querySelectorAll('#scripts')
   let x2 = document.querySelectorAll('#scripts2')
 
  // x[0].selectedIndex = 0
@@ -244,9 +244,9 @@ function hoverH(s){
  document.getElementById("state-name").innerText = 'Total';
 
 
- if(s===1)
+//  if(s===1)
  hoverK('tt',1)
- else
+ if(document.getElementById(`${s}`)!==null)
  document.getElementById(`${s}`).style.fill = "rgb(243, 143, 132)";
 
 }
@@ -661,7 +661,7 @@ state = st
 data2 = states_daily
 var tthtml;
 for (let [state2, value] of Object.entries(state)){
-    html = `<tr id="${state2}" onmouseover="hoverK(${state2})"  class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
+    html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
     let active = 0;
     let recovered = 0;
     let ded = 0;
