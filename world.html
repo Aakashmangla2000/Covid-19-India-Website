@@ -25,10 +25,22 @@
             font-size: 20;
 
         }
+        
+        @media only screen and (max-width: 2200px) {
+            .fs{
+                font-size: 1.4rem;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            .fs{
+                font-size: 0.8rem;
+            }
+        }
         @media only screen and (min-width: 600px) {
   .center{
     margin-left:15vw ;
-  }
+  } 
+ 
 }
     </style>
 </head>
@@ -57,7 +69,30 @@
         </div>
       </nav>
       <!-- body -->
+
       <br><br><br><br>
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+        
+            <div >
+            <span class="box font-weight-bold text-danger bg1 fs" style="font-size: 1em;">&nbsp; Confirmed 
+             <p class="text-danger fs"  id="confirmed-cases-t" >0</p></span>
+            </div>
+            <div>
+             <span class="box font-weight-bold text-primary bg2 fs" style="font-size: 1em;"> &nbsp;&nbsp; &nbsp;&nbsp; Active   
+                <p class="text-primary fs"  id="active-cases-t" >0</p></span>
+            </div>
+            <div>
+                <span class="box font-weight-bold text-success bg3 fs" style="font-size:1em;"> &nbsp;Recovered 
+                   <p class="text-success  fs"  id="recovered-cases-t" >0</p></span>
+                </div>
+                <div>
+                   <span class="box font-weight-bold text-secondary bg4 fs" style="font-size: 1em;">Deceased
+                      <p class="text-secondary fs"  id="ded-cases-t" >0</p></span>
+                   </div>
+                  
+    </div>
+
+     <br> <br>
       <h2 class="center-m text-danger">Confirmed Cases</h2>
       <br>
       <div class='center'>
@@ -99,6 +134,59 @@
     </div>
 </div>
 </body>
+<script>
+
+async function retrieve(){
+    let result = await fetch('https://www.trackcorona.live/api/countries')
+    let data = await result.json();
+  let data2 =data.data
+    console.log(data2 ,'hi')
+    let confirmed =0
+    let dead=0
+    let recovered=0 
+    data2.map(el=>{confirmed+=el.confirmed})
+    data2.map(el=>{dead+=el.dead})
+    data2.map(el=>{recovered+=el.recovered})
+    let active=((confirmed-dead)-recovered)
+    console.log(confirmed)
+    console.log(dead)
+    console.log (active)
+putdata(confirmed);
+putdata2(dead)
+putdata0(recovered)
+putdata1(active)
+}
+retrieve();
+function putdata(confirmed){
+    let con=addComma(confirmed)
+    document.getElementById('confirmed-cases-t').innerHTML=con
+}
+function putdata2(dead){
+    let ded =addComma(dead)
+    document.getElementById('ded-cases-t').innerHTML=ded
+}
+function putdata0(recovered){
+    let rec =addComma(recovered)
+    document.getElementById('recovered-cases-t').innerHTML=rec
+}
+function putdata1(active){
+    let act=addComma(active)
+    document.getElementById('active-cases-t').innerHTML=act
+
+}
+function addComma(x){
+// var x=12345678;
+x = x.toString();
+var lastThree = x.substring(x.length-3);
+var otherNumbers = x.substring(0,x.length-3);
+if(otherNumbers != '')
+    lastThree = ',' + lastThree;
+var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+return res
+}
+
+
+</script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
