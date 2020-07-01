@@ -12,6 +12,7 @@
     <meta name="apple-mobile-web-app-title" content="Covid India">
     <link rel="apple-touch-icon" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel='shortcut icon' type='image/x-icon' href='svg/covid.png' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap" rel="stylesheet">
@@ -70,7 +71,7 @@
       </nav>
       <!-- body -->
 
-      <br><br><br><br>
+      <br><br><br><br><br>
       <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
         
             <div >
@@ -92,7 +93,33 @@
                   
     </div>
 
+    
+
      <br> <br>
+     <div class="col">
+      <div class="table-responsive rounded" >
+      <table id="myTable2" class="rounded table table-sm table-hover table-striped table-bordered tb2" style="background-color: rgba(1, 1, 44, 0.589);color:white" cellspacing="0" width="100%">
+         <thead>
+           <tr>
+             <th class="th-sm" onclick="">Country
+             </th>
+             <th class="th-sm" onclick="">C
+             </th>
+             <th class="th-sm" onclick="">A
+             </th>
+             <th class="th-sm" onclick="">R
+             </th>
+             <th class="th-sm" onclick="">D
+             </th>
+           </tr>
+         </thead>
+         <tbody id="table-body"></tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+   </div>
+   <br><br>
       <h2 class="center-m text-danger">Confirmed Cases</h2>
       <br>
       <div class='center'>
@@ -141,6 +168,7 @@ async function retrieve(){
     let data = await result.json();
   let data2 =data.data
     console.log(data2 ,'hi')
+    createTable(data2)
     let confirmed =0
     let dead=0
     let recovered=0 
@@ -174,6 +202,92 @@ function putdata1(active){
     document.getElementById('active-cases-t').innerHTML=act
 
 }
+
+function sortTable(n) {
+var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+table = document.getElementById("myTable2");
+switching = true;
+// Set the sorting direction to ascending:
+dir = "asc";
+/* Make a loop that will continue until
+no switching has been done: */
+while (switching) {
+// Start by saying: no switching is done:
+switching = false;
+rows = table.rows;
+/* Loop through all table rows (except the
+first, which contains table headers): */
+// let xx,yy;
+
+for (i = 1; i < (rows.length - 1); i++) {
+  // Start by saying there should be no switching:
+  shouldSwitch = false;
+  /* Get the two elements you want to compare,
+  one from current row and one from the next: */
+  x = rows[i].getElementsByTagName("TD")[n];
+  //console.log(x.innerHTML[0])
+  y = rows[i + 1].getElementsByTagName("TD")[n];
+  /* Check if the two rows should switch place,
+  based on the direction, asc or desc: */
+  //   if(x.innerHTML[0]==='<'){
+  //   let ser = x.innerHTML.search('n> ')
+  //   xx = x.innerHTML.slice(ser+3,ser.length).replace(",","")
+  //  // xx = xx.replace(",","")
+  //   let ser2 = y.innerHTML.search('n> ')
+  //   yy = y.innerHTML.slice(ser2+3,ser2.length)
+  //  // yy = yy.replace(",",'')
+  //   //console.log(xx,yy)
+  // }
+  // else{
+  xx = x.innerHTML;
+  yy = y.innerHTML;
+  
+  if (Number(xx) > Number(yy)) {
+    shouldSwitch = true;
+    break;
+  }
+  if (dir == "asc") {
+    if (xx.toLowerCase() > yy.toLowerCase()) {
+      // If so, mark as a switch and break the loop:
+      shouldSwitch = true;
+      break;
+    }
+  } else if (dir == "desc") {
+    if (xx.toLowerCase() < yy.toLowerCase()) {
+      // If so, mark as a switch and break the loop:
+      shouldSwitch = true;
+      break;
+    }
+  }
+}
+if (shouldSwitch) {
+  /* If a switch has been marked, make the switch
+  and mark that a switch has been done: */
+  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+  switching = true;
+  // Each time a switch is done, increase this count by 1:
+  switchcount ++;
+} else {
+  /* If no switching has been done AND the direction is "asc",
+  set the direction to "desc" and run the while loop again. */
+  if (switchcount == 0 && dir == "asc") {
+    dir = "desc";
+    switching = true;
+  }
+}
+}
+} 
+
+function createTable(dat){
+
+let data2;
+dat.sort((a, b) => (a.confirmed > b.confirmed) ? -1 : 1)
+dat.map(el => {
+  html = `<tr style="color:white" id="${el.location}" class="table-el"><td>${el.location}</td><td>${addComma(el.confirmed)}</td><td>${addComma(el.confirmed-el.recovered-el.dead)}</td><td>${addComma(el.recovered)}</td><td>${addComma(el.dead)}</td></tr>`;
+  document.querySelector('#table-body').insertAdjacentHTML('beforeend',html);
+})
+}
+
 function addComma(x){
 // var x=12345678;
 x = x.toString();
