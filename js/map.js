@@ -435,8 +435,10 @@ states_daily = await data2;
 let result2 = await fetch(`https://api.covid19india.org/data.json`)
   let dat = await result2.json();
   let dat2 = await dat.cases_time_series;
+  let dat3 = await dat.statewise;
+  statewise = await dat3;
   cases_time_series = await dat2;
-// console.log(cases_time_series)
+console.log(statewise)
 updateData()
 
 createTable();
@@ -447,7 +449,7 @@ createTotalGraph('myChart','tc',colr,'Confirmed',5);
 
 
 
-var states_daily,  cases_time_series;
+var states_daily,  cases_time_series, statewise;
 
 getData()
 function runApp(){
@@ -664,40 +666,24 @@ function createTable(){
 
 let data2;
 state = st
-data2 = states_daily
+data2 = statewise
 var tthtml;
-for (let [state2, value] of Object.entries(state)){
+
+for(let i = 0; i < statewise.length; i++){
+    state2 = (statewise[i].statecode).toLowerCase();
     html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
-    let active = 0;
-    let recovered = 0;
-    let ded = 0;
-    let d_c = 0;
-    let d_a = 0;
-    let d_r = 0;
-    let d_d = 0;
+    let active = statewise[i].active;
+    let recovered = statewise[i].recovered;
+    let ded = statewise[i].deaths;
+    let confirmed = statewise[i].confirmed;
+    let d_c = statewise[i].deltaconfirmed;
+    let d_a = statewise[i];
+    let d_r = statewise[i].deltarecovered;
+    let d_d = statewise[i].deltadeaths;
 
-    // if(state2==='tt')
-    // continue;
-    for (j = 0; j < data2.length; j++){
-    if(data2[j].status === 'Confirmed'){
-        active += parseInt(data2[j][state2]);
-    }
-    if(data2[j].status === 'Recovered'){
-        recovered += parseInt(data2[j][state2]);
-    }
-    if(data2[j].status === 'Deceased'){
-        ded += parseInt(data2[j][state2]);
-    }
-}
-
-d_c = data2[data2.length-3][state2];
-d_r = data2[data2.length-2][state2];
-d_d = data2[data2.length-1][state2];
-
-
-    nhtml = html.replace('%st%', st[state2]);
-    nhtml = nhtml.replace('%c%', addComma(active));
-    nhtml = nhtml.replace('%a%', addComma(active-recovered-ded));
+    nhtml = html.replace('%st%', statewise[i].state);
+    nhtml = nhtml.replace('%c%', addComma(confirmed));
+    nhtml = nhtml.replace('%a%', addComma(active));
     nhtml = nhtml.replace('%r%', addComma(recovered));
     nhtml = nhtml.replace('%d%', addComma(ded));
 
@@ -732,10 +718,156 @@ d_d = data2[data2.length-1][state2];
  //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
     document.getElementById(state2).addEventListener("mouseout",hoverHataya)
     document.getElementById(state2).addEventListener("mouseover",hoverKara)}
-
 }
+
+// for (let [state2, value] of Object.entries(state)){
+//     html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
+//     let active = 0;
+//     let recovered = 0;
+//     let ded = 0;
+//     let d_c = 0;
+//     let d_a = 0;
+//     let d_r = 0;
+//     let d_d = 0;
+
+//     // if(state2==='tt')
+//     // continue;
+//     for (j = 0; j < data2.length; j++){
+//     if(data2[j].status === 'Confirmed'){
+//         active += parseInt(data2[j][state2]);
+//     }
+//     if(data2[j].status === 'Recovered'){
+//         recovered += parseInt(data2[j][state2]);
+//     }
+//     if(data2[j].status === 'Deceased'){
+//         ded += parseInt(data2[j][state2]);
+//     }
+// }
+
+// d_c = data2[data2.length-3][state2];
+// d_r = data2[data2.length-2][state2];
+// d_d = data2[data2.length-1][state2];
+
+
+//     nhtml = html.replace('%st%', st[state2]);
+//     nhtml = nhtml.replace('%c%', addComma(active));
+//     nhtml = nhtml.replace('%a%', addComma(active-recovered-ded));
+//     nhtml = nhtml.replace('%r%', addComma(recovered));
+//     nhtml = nhtml.replace('%d%', addComma(ded));
+
+//     if(d_c!=0)
+//     nhtml = nhtml.replace('%d-c%', "↑" + d_c + "");
+//     else
+//     nhtml = nhtml.replace('%d-c%', ""); + ""
+    
+//     if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)>=0)
+//     nhtml = nhtml.replace('%d-a%', "↑" + (d_c-d_r-d_d) + "");
+//     else if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)<=0)
+//     nhtml = nhtml.replace('%d-a%', "↓" + -(d_c-d_r-d_d) + "");
+
+//     else
+//     nhtml = nhtml.replace('%d-a%', "");
+
+//     if(d_r!=0)
+//     nhtml = nhtml.replace('%d-r%', "↑" + d_r + "");
+//     else
+//     nhtml = nhtml.replace('%d-r%', "");
+
+//     if(d_d!=0)
+//     nhtml = nhtml.replace('%d-d%', "↑" + d_d + "");
+//     else
+//     nhtml = nhtml.replace('%d-d%', "");
+
+//      if(state2==='tt'){
+//      tthtml = nhtml
+//      }
+//     else{
+//     document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
+//  //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
+//     document.getElementById(state2).addEventListener("mouseout",hoverHataya)
+//     document.getElementById(state2).addEventListener("mouseover",hoverKara)}
+
+// }
 // document.querySelector('#table-body').insertAdjacentHTML('beforeend',tthtml);
 }
+
+//Testing new API
+function createTable2(){
+
+  let data2;
+  state = st
+  data2 = states_daily
+  var tthtml;
+  for (let [state2, value] of Object.entries(state)){
+      html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
+      let active = 0;
+      let recovered = 0;
+      let ded = 0;
+      let d_c = 0;
+      let d_a = 0;
+      let d_r = 0;
+      let d_d = 0;
+  
+      // if(state2==='tt')
+      // continue;
+      for (j = 0; j < data2.length; j++){
+      if(data2[j].status === 'Confirmed'){
+          active += parseInt(data2[j][state2]);
+      }
+      if(data2[j].status === 'Recovered'){
+          recovered += parseInt(data2[j][state2]);
+      }
+      if(data2[j].status === 'Deceased'){
+          ded += parseInt(data2[j][state2]);
+      }
+  }
+  
+  d_c = data2[data2.length-3][state2];
+  d_r = data2[data2.length-2][state2];
+  d_d = data2[data2.length-1][state2];
+  
+  
+      nhtml = html.replace('%st%', st[state2]);
+      nhtml = nhtml.replace('%c%', addComma(active));
+      nhtml = nhtml.replace('%a%', addComma(active-recovered-ded));
+      nhtml = nhtml.replace('%r%', addComma(recovered));
+      nhtml = nhtml.replace('%d%', addComma(ded));
+  
+      if(d_c!=0)
+      nhtml = nhtml.replace('%d-c%', "↑" + d_c + "");
+      else
+      nhtml = nhtml.replace('%d-c%', ""); + ""
+      
+      if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)>=0)
+      nhtml = nhtml.replace('%d-a%', "↑" + (d_c-d_r-d_d) + "");
+      else if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)<=0)
+      nhtml = nhtml.replace('%d-a%', "↓" + -(d_c-d_r-d_d) + "");
+  
+      else
+      nhtml = nhtml.replace('%d-a%', "");
+  
+      if(d_r!=0)
+      nhtml = nhtml.replace('%d-r%', "↑" + d_r + "");
+      else
+      nhtml = nhtml.replace('%d-r%', "");
+  
+      if(d_d!=0)
+      nhtml = nhtml.replace('%d-d%', "↑" + d_d + "");
+      else
+      nhtml = nhtml.replace('%d-d%', "");
+  
+       if(state2==='tt'){
+       tthtml = nhtml
+       }
+      else{
+      document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
+   //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
+      document.getElementById(state2).addEventListener("mouseout",hoverHataya)
+      document.getElementById(state2).addEventListener("mouseover",hoverKara)}
+  
+  }
+  // document.querySelector('#table-body').insertAdjacentHTML('beforeend',tthtml);
+  }
 
 
 function myFunction() {
@@ -777,6 +909,7 @@ first, which contains table headers): */
 // let xx,yy;
 
 for (i = 1; i < (rows.length - 1); i++) {
+  console.log(rows[i])
   // Start by saying there should be no switching:
   shouldSwitch = false;
   /* Get the two elements you want to compare,
