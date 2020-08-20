@@ -480,11 +480,17 @@ let nded = (dat3[dat3.length-1].dailydeceased);
 //         ded += parseInt(data2[i][state]);
 //     }
 // }
+
+
 document.getElementById("total-a").innerText = addComma(active-recovered-ded);
 document.getElementById("total-c").innerText = addComma(active);
 document.getElementById("total-r").innerText = addComma(recovered);
 document.getElementById("total-d").innerText = addComma(ded);
 
+if(nactive-nrecovered-nded < 0){
+  document.getElementById("new-val-a").innerText = "[↓" + addComma(-(nactive-nrecovered-nded)) +']';
+}
+else
 document.getElementById("new-val-a").innerText = "[↑" + addComma(nactive-nrecovered-nded) +']';
 document.getElementById("new-val-c").innerText = "[↑" + addComma(nactive) + ']';
 document.getElementById("new-val-r").innerText = "[↑" + addComma(nrecovered) + ']';
