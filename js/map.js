@@ -840,6 +840,8 @@ function createTable(newDat){
       d_c = 0
       if(d_a == undefined)
       d_a = 0
+      if(d_r == undefined)
+      d_r = 0
       if(d_d == undefined)
       d_d = 0
       if(d_t == undefined)
