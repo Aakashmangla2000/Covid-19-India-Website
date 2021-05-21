@@ -776,7 +776,7 @@ function createTable(newDat){
   state = st
   data2 = statewise
   var tthtml;
-
+  console.log(newDat,'ok')
   dateToday = ''
   d = new Date();
   year = d.getFullYear()
@@ -800,6 +800,8 @@ function createTable(newDat){
     dataForToday = newDat[state].dates[dateToday]
     prevData = newDat[state].dates[prevDate]
 
+    if(dataForToday == undefined)
+    dataForToday = prevData
     if(dataForToday == undefined) 
     continue
     newCases = dataForToday.delta
