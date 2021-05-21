@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily corona virus cases data, state wise for India displayed through maps and charts. The Case count is updated daily. With latest updated news about Covid-19 in India">
+    <meta property="og:image" content="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png">
+    <meta property="og:url" content="https://aakashmangla2000.github.io/Covid-19-India-Website/" />
+    <meta name="title" content="Live Covid-19 Data India">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Covid India">
+    <link rel="apple-touch-icon" href="https://github.com/Aakashmangla2000/Covid-19-India-Website/blob/master/svg/logo.png">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel='shortcut icon' type='image/x-icon' href='svg/covid.png' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <title>World</title>
+    <style>
+        .center-m{
+            padding-left: 7vw; padding-right: 7px; display: flex; justify-content: center; align-content: center;
+            font-size: 20;
+
+        }
+        
+        @media only screen and (max-width: 2200px) {
+            .fs{
+                font-size: 1.4rem;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            .fs{
+                font-size: 0.8rem;
+            }
+        }
+        @media only screen and (min-width: 600px) {
+  .center{
+    margin-left:15vw ;
+  } 
+ 
+}
+    </style>
+</head>
+<body style="background-color: rgb(0, 0, 31); font-family: 'Oxygen', sans-serif; color: white;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    
+        <a class="navbar-brand" style="font-size: x-large;" href="index.html"><img style="width: 45px; height: 45px; filter: invert(100%);" src="svg/logo.png"></img>Covid-19 Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="index.html">Home </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="news.html">News </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">World<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+            <!-- <button class="btn btn-outline-success my-2 my-sm-0 text-light text-success" onclick="" type="submit">Search</button> -->
+          </form>
+        </div>
+      </nav>
+      <!-- body -->
+
+      <br><br><br><br><br>
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+        
+            <div >
+            <span class="box font-weight-bold text-danger bg1 fs" style="font-size: 1em;"> Confirmed 
+             <p class="text-danger fs"  id="confirmed-cases-t" >0</p></span>
+            </div>
+            <div>
+             <span class="box font-weight-bold text-primary bg2 fs" style="font-size: 1em;">&nbsp;  Active   
+                <p class="text-primary fs"  id="active-cases-t" >0</p></span>
+            </div>
+            <div>
+                <span class="box font-weight-bold text-success bg3 fs" style="font-size:1em;">Recovered 
+                   <p class="text-success  fs"  id="recovered-cases-t" >0</p></span>
+                </div>
+                <div>
+                   <span class="box font-weight-bold text-secondary bg4 fs" style="font-size: 1em;">Deceased
+                      <p class="text-secondary fs"  id="ded-cases-t" >0</p></span>
+                   </div>
+                  
+    </div>
+
+    
+
+     <br> <br>
+     <div class="col">
+      <div class="table-responsive rounded" >
+      <table id="myTable2" class="rounded table table-sm table-hover table-striped table-bordered tb2" style="background-color: rgba(1, 1, 44, 0.589);color:white" cellspacing="0" width="100%">
+         <thead>
+           <tr>
+             <th class="th-sm" onclick="">Country
+             </th>
+             <th class="th-sm" onclick="">C
+             </th>
+             <th class="th-sm" onclick="">A
+             </th>
+             <th class="th-sm" onclick="">R
+             </th>
+             <th class="th-sm" onclick="">D
+             </th>
+           </tr>
+         </thead>
+         <tbody id="table-body"></tbody>
+      </table>
+      </div>
+      <br>
+      <br>
+   </div>
+   <br><br>
+      
+</div>
+</body>
+<script>
+
+async function retrieve(){
+    let result = await fetch('https://api.covid19india.org/v4/min/timeseries.min.json')
+    let data = await result.json();
+  let data2 =data
+    console.log(data2 ,'hi')
+    createTable(data2)
+    let confirmed =0
+    let dead=0
+    let recovered=0 
+    data2.map(el=>{confirmed+=el.confirmed})
+    data2.map(el=>{dead+=el.dead})
+    data2.map(el=>{recovered+=el.recovered})
+    let active=((confirmed-dead)-recovered)
+    console.log(confirmed)
+    console.log(dead)
+    console.log (active)
+putdata(confirmed);
+putdata2(dead)
+putdata0(recovered)
+putdata1(active)
+}
+retrieve();
+function putdata(confirmed){
+    let con=addComma(confirmed)
+    document.getElementById('confirmed-cases-t').innerHTML=con
+}
+function putdata2(dead){
+    let ded =addComma(dead)
+    document.getElementById('ded-cases-t').innerHTML=ded
+}
+function putdata0(recovered){
+    let rec =addComma(recovered)
+    document.getElementById('recovered-cases-t').innerHTML=rec
+}
+function putdata1(active){
+    let act=addComma(active)
+    document.getElementById('active-cases-t').innerHTML=act
+
+}
+
+function sortTable(n) {
+var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+table = document.getElementById("myTable2");
+switching = true;
+// Set the sorting direction to ascending:
+dir = "asc";
+/* Make a loop that will continue until
+no switching has been done: */
+while (switching) {
+// Start by saying: no switching is done:
+switching = false;
+rows = table.rows;
+/* Loop through all table rows (except the
+first, which contains table headers): */
+// let xx,yy;
+
+for (i = 1; i < (rows.length - 1); i++) {
+  // Start by saying there should be no switching:
+  shouldSwitch = false;
+  /* Get the two elements you want to compare,
+  one from current row and one from the next: */
+  x = rows[i].getElementsByTagName("TD")[n];
+  //console.log(x.innerHTML[0])
+  y = rows[i + 1].getElementsByTagName("TD")[n];
+  /* Check if the two rows should switch place,
+  based on the direction, asc or desc: */
+  //   if(x.innerHTML[0]==='<'){
+  //   let ser = x.innerHTML.search('n> ')
+  //   xx = x.innerHTML.slice(ser+3,ser.length).replace(",","")
+  //  // xx = xx.replace(",","")
+  //   let ser2 = y.innerHTML.search('n> ')
+  //   yy = y.innerHTML.slice(ser2+3,ser2.length)
+  //  // yy = yy.replace(",",'')
+  //   //console.log(xx,yy)
+  // }
+  // else{
+  xx = x.innerHTML;
+  yy = y.innerHTML;
+  
+  if (Number(xx) > Number(yy)) {
+    shouldSwitch = true;
+    break;
+  }
+  if (dir == "asc") {
+    if (xx.toLowerCase() > yy.toLowerCase()) {
+      // If so, mark as a switch and break the loop:
+      shouldSwitch = true;
+      break;
+    }
+  } else if (dir == "desc") {
+    if (xx.toLowerCase() < yy.toLowerCase()) {
+      // If so, mark as a switch and break the loop:
+      shouldSwitch = true;
+      break;
+    }
+  }
+}
+if (shouldSwitch) {
+  /* If a switch has been marked, make the switch
+  and mark that a switch has been done: */
+  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+  switching = true;
+  // Each time a switch is done, increase this count by 1:
+  switchcount ++;
+} else {
+  /* If no switching has been done AND the direction is "asc",
+  set the direction to "desc" and run the while loop again. */
+  if (switchcount == 0 && dir == "asc") {
+    dir = "desc";
+    switching = true;
+  }
+}
+}
+} 
+
+function createTable(dat){
+
+let data2;
+dat.sort((a, b) => (a.confirmed > b.confirmed) ? -1 : 1)
+dat.map(el => {
+  html = `<tr style="color:white" id="${el.location}" class="table-el"><td>${el.location}</td><td>${addComma(el.confirmed)}</td><td>${addComma(el.confirmed-el.recovered-el.dead)}</td><td>${addComma(el.recovered)}</td><td>${addComma(el.dead)}</td></tr>`;
+  document.querySelector('#table-body').insertAdjacentHTML('beforeend',html);
+})
+}
+
+function addComma(x){
+// var x=12345678;
+x = x.toString();
+var lastThree = x.substring(x.length-3);
+var otherNumbers = x.substring(0,x.length-3);
+if(otherNumbers != '')
+    lastThree = ',' + lastThree;
+var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+return res
+}
+
+
+</script>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</html>

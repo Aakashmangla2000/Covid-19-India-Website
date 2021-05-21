@@ -129,7 +129,7 @@
    // ret()
 
     async function getIn(){
-      let result = await fetch('https://cors-anywhere.herokuapp.com/https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms?feedtype=sjson');
+      let result = await fetch('https://api.allorigins.win/get?callback=myFunc&url=https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms?feedtype=sjson');
      
        // document.querySelector('.news').insertAdjacentHTML('beforeend',nhtml)
       let data = await result.json();

@@ -370,6 +370,47 @@ function selectBox2() {
 
 //Map.js
 
+st2 = {
+  "AN": "Andaman and Nicobar Islands",
+  "AP": "Andhra Pradesh",
+  "AR": "Arunachal Pradesh",
+  "AS": "Assam",
+  "BR": "Bihar",
+  "CH": "Chandigarh",
+  "CT": "Chhatisgarh",
+  "DD": "Daman and Diu",
+  "DL": "Delhi",
+  "DN": "Dadar and Nagar Haveli",
+  "GA": "Goa",
+  "GJ": "Gujurat",
+  "HP": "Himachal Pradesh",
+  "HR": "Haryana",
+  "JH": "Jharkhand",
+  "JK": "Jammu and Kashmir",
+  "KA": "Karnataka",
+  "KL": "Kerela",
+  "LA": "Ladakh",
+  "LD": "Lakshwadeep",
+  "MH": "Maharashtra",
+  "ML": "Meghalaya",
+  "MN": "Manipur",
+  "MP": "Madhya Pradesh",
+  "MZ": "Mizoram",
+  "NL": "Nagaland",
+  "OR": "Odisha",
+  "PB": "Punjab",
+  "PY": "Puducherry",
+  "RJ": "Rajasthan",
+  "SK": "Sikkim",
+  "TG": "Telangana",
+  "TN": "Tamil Nadu",
+  "TR": "Tripura",
+  "TT": "Total",
+  "UN": "State Unassigned",
+  "UP": "Uttar Pradesh",
+  "UT": "Uttarakhand",
+  "WB": "West Bengal"
+}
 
 st = {
   "an": "Andaman and Nicobar Islands",
@@ -426,6 +467,9 @@ var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
 return res
 }
 
+
+// https://api.covid19india.org/v4/min/timeseries.min.json
+
 async function getData(){
 let result = await fetch(`https://api.covid19india.org/states_daily.json`)
 let data = await result.json();
@@ -438,10 +482,15 @@ let result2 = await fetch(`https://api.covid19india.org/data.json`)
   let dat3 = await dat.statewise;
   statewise = await dat3;
   cases_time_series = await dat2;
+
+let result3 = await fetch(`https://api.covid19india.org/v4/min/timeseries.min.json`)
+let newDat = await result3.json();
+console.log(newDat)
+
 console.log(statewise)
 updateData()
 
-createTable();
+createTable(newDat);
 createTotalGraph('myChart','tc',colr,'Confirmed',5);
 
 
@@ -662,96 +711,28 @@ document.getElementById(`IN-${this.id.toUpperCase()}`).style.fill = "rgb(243, 14
 
 
 
-function createTable(){
+// function createTable(){
 
-let data2;
-state = st
-data2 = statewise
-var tthtml;
+// let data2;
+// state = st
+// data2 = statewise
+// var tthtml;
 
-for(let i = 0; i < statewise.length; i++){
-    state2 = (statewise[i].statecode).toLowerCase();
-    html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
-    let active = statewise[i].active;
-    let recovered = statewise[i].recovered;
-    let ded = statewise[i].deaths;
-    let confirmed = statewise[i].confirmed;
-    let d_c = statewise[i].deltaconfirmed;
-    let d_a = statewise[i];
-    let d_r = statewise[i].deltarecovered;
-    let d_d = statewise[i].deltadeaths;
-
-    nhtml = html.replace('%st%', statewise[i].state);
-    nhtml = nhtml.replace('%c%', addComma(confirmed));
-    nhtml = nhtml.replace('%a%', addComma(active));
-    nhtml = nhtml.replace('%r%', addComma(recovered));
-    nhtml = nhtml.replace('%d%', addComma(ded));
-
-    if(d_c!=0)
-    nhtml = nhtml.replace('%d-c%', "↑" + d_c + "");
-    else
-    nhtml = nhtml.replace('%d-c%', ""); + ""
-    
-    if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)>=0)
-    nhtml = nhtml.replace('%d-a%', "↑" + (d_c-d_r-d_d) + "");
-    else if((d_c-d_r-d_d)!=0&&(d_c-d_r-d_d)<=0)
-    nhtml = nhtml.replace('%d-a%', "↓" + -(d_c-d_r-d_d) + "");
-
-    else
-    nhtml = nhtml.replace('%d-a%', "");
-
-    if(d_r!=0)
-    nhtml = nhtml.replace('%d-r%', "↑" + d_r + "");
-    else
-    nhtml = nhtml.replace('%d-r%', "");
-
-    if(d_d!=0)
-    nhtml = nhtml.replace('%d-d%', "↑" + d_d + "");
-    else
-    nhtml = nhtml.replace('%d-d%', "");
-
-     if(state2==='tt'){
-     tthtml = nhtml
-     }
-    else{
-    document.querySelector('#table-body').insertAdjacentHTML('beforeend',nhtml);
- //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
-    document.getElementById(state2).addEventListener("mouseout",hoverHataya)
-    document.getElementById(state2).addEventListener("mouseover",hoverKara)}
-}
-
-// for (let [state2, value] of Object.entries(state)){
+// for(let i = 0; i < statewise.length; i++){
+//     state2 = (statewise[i].statecode).toLowerCase();
 //     html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
-//     let active = 0;
-//     let recovered = 0;
-//     let ded = 0;
-//     let d_c = 0;
-//     let d_a = 0;
-//     let d_r = 0;
-//     let d_d = 0;
+//     let active = statewise[i].active;
+//     let recovered = statewise[i].recovered;
+//     let ded = statewise[i].deaths;
+//     let confirmed = statewise[i].confirmed;
+//     let d_c = statewise[i].deltaconfirmed;
+//     let d_a = statewise[i];
+//     let d_r = statewise[i].deltarecovered;
+//     let d_d = statewise[i].deltadeaths;
 
-//     // if(state2==='tt')
-//     // continue;
-//     for (j = 0; j < data2.length; j++){
-//     if(data2[j].status === 'Confirmed'){
-//         active += parseInt(data2[j][state2]);
-//     }
-//     if(data2[j].status === 'Recovered'){
-//         recovered += parseInt(data2[j][state2]);
-//     }
-//     if(data2[j].status === 'Deceased'){
-//         ded += parseInt(data2[j][state2]);
-//     }
-// }
-
-// d_c = data2[data2.length-3][state2];
-// d_r = data2[data2.length-2][state2];
-// d_d = data2[data2.length-1][state2];
-
-
-//     nhtml = html.replace('%st%', st[state2]);
-//     nhtml = nhtml.replace('%c%', addComma(active));
-//     nhtml = nhtml.replace('%a%', addComma(active-recovered-ded));
+//     nhtml = html.replace('%st%', statewise[i].state);
+//     nhtml = nhtml.replace('%c%', addComma(confirmed));
+//     nhtml = nhtml.replace('%a%', addComma(active));
 //     nhtml = nhtml.replace('%r%', addComma(recovered));
 //     nhtml = nhtml.replace('%d%', addComma(ded));
 
@@ -786,52 +767,97 @@ for(let i = 0; i < statewise.length; i++){
 //  //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
 //     document.getElementById(state2).addEventListener("mouseout",hoverHataya)
 //     document.getElementById(state2).addEventListener("mouseover",hoverKara)}
-
 // }
-// document.querySelector('#table-body').insertAdjacentHTML('beforeend',tthtml);
-}
+// }
 
-//Testing new API
-function createTable2(){
+function createTable(newDat){
 
   let data2;
   state = st
-  data2 = states_daily
+  data2 = statewise
   var tthtml;
-  for (let [state2, value] of Object.entries(state)){
-      html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td></tr>`;
-      let active = 0;
-      let recovered = 0;
-      let ded = 0;
-      let d_c = 0;
-      let d_a = 0;
-      let d_r = 0;
-      let d_d = 0;
+
+  dateToday = ''
+  d = new Date();
+  year = d.getFullYear()
+  month = d.getMonth()
+  today = d.getDate()
+  month += 1
+  if(month < 10)
+    month = `0${month}`
+  dateToday = `${year}-${month}-${today}`
+  prevDate = `${year}-${month}-${today-1}`
   
-      // if(state2==='tt')
-      // continue;
-      for (j = 0; j < data2.length; j++){
-      if(data2[j].status === 'Confirmed'){
-          active += parseInt(data2[j][state2]);
+
+  for(const state in newDat){
+    let d_c = ''
+    let d_r = ''
+    let d_d = ''
+    let d_t = ''
+    let d_a = ''
+    let p = 0
+    // console.log(newDat[state].dates[dateToday],dateToday)
+    dataForToday = newDat[state].dates[dateToday]
+    prevData = newDat[state].dates[prevDate]
+
+    if(dataForToday == undefined) 
+    continue
+    newCases = dataForToday.delta
+    totalCases = dataForToday.total
+    state2 = state.toLowerCase();
+      html = `<tr id="${state2}" onmouseover="hoverK(${state2})" onmouseout="hoverH(${state2})" class="table-el"><td>%st%</td><td><span class="badge badge-danger" id="">%d-c%</span> %c%</td><td><span class="badge badge-primary" id="">%d-a%</span> %a%</td><td><span class="badge badge-success" id="">%d-r%</span> %r%</td><td><span class="badge badge-secondary" id="">%d-d%</span> %d%</td><td> %p%</td><td><span class="badge badge-info" id="">%d-t%</span> %t%</td></tr>`;
+      // let active = totalCases.active;
+      let recovered = totalCases.recovered;
+      let ded = totalCases.deceased;
+      let confirmed = totalCases.confirmed;
+      let active = confirmed - recovered - ded;
+      let tested = totalCases.tested;
+      if(newCases != undefined){
+       d_c = newCases.confirmed;
+       d_r = newCases.recovered;
+       d_d = newCases.deceased;
+       d_t = newCases.tested;
+       d_a = d_c - d_r - d_d;
+       p = ((d_c)/d_t)*100
+      
+      if(p != undefined && p!= NaN)
+      p = p.toFixed(2)
+      if(p == 'NaN')
+      p = 0
+
+      if(p == 0)
+      {
+        p = (prevData.delta.confirmed/prevData.delta.tested)*100
+        p = p.toFixed(2)      
       }
-      if(data2[j].status === 'Recovered'){
-          recovered += parseInt(data2[j][state2]);
+      
+      if(p == 'NaN')
+        p = 0
+        
+      if(d_c == undefined)
+      d_c = 0
+      if(d_a == undefined)
+      d_a = 0
+      if(d_d == undefined)
+      d_d = 0
+      if(d_t == undefined)
+      d_t = 0
+      if(p == undefined)
+      p = 0
       }
-      if(data2[j].status === 'Deceased'){
-          ded += parseInt(data2[j][state2]);
-      }
-  }
+      
+       
+      
+
+      
   
-  d_c = data2[data2.length-3][state2];
-  d_r = data2[data2.length-2][state2];
-  d_d = data2[data2.length-1][state2];
-  
-  
-      nhtml = html.replace('%st%', st[state2]);
-      nhtml = nhtml.replace('%c%', addComma(active));
-      nhtml = nhtml.replace('%a%', addComma(active-recovered-ded));
+      nhtml = html.replace('%st%', st2[state]);
+      nhtml = nhtml.replace('%c%', addComma(confirmed));
+      nhtml = nhtml.replace('%a%', addComma(active));
       nhtml = nhtml.replace('%r%', addComma(recovered));
       nhtml = nhtml.replace('%d%', addComma(ded));
+      nhtml = nhtml.replace('%p%', `${p}%`);
+      nhtml = nhtml.replace('%t%', addComma(tested));
   
       if(d_c!=0)
       nhtml = nhtml.replace('%d-c%', "↑" + d_c + "");
@@ -855,6 +881,11 @@ function createTable2(){
       nhtml = nhtml.replace('%d-d%', "↑" + d_d + "");
       else
       nhtml = nhtml.replace('%d-d%', "");
+
+      if(d_t!=0)
+      nhtml = nhtml.replace('%d-t%', "↑" + d_t + "");
+      else
+      nhtml = nhtml.replace('%d-t%', "");
   
        if(state2==='tt'){
        tthtml = nhtml
@@ -864,9 +895,9 @@ function createTable2(){
    //   document.getElementById(state2).addEventListener("mouseover",hoverKara)
       document.getElementById(state2).addEventListener("mouseout",hoverHataya)
       document.getElementById(state2).addEventListener("mouseover",hoverKara)}
-  
   }
-  // document.querySelector('#table-body').insertAdjacentHTML('beforeend',tthtml);
+  
+  
   }
 
 
