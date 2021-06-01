@@ -485,9 +485,9 @@ let result2 = await fetch(`https://api.covid19india.org/data.json`)
 
 let result3 = await fetch(`https://api.covid19india.org/v4/min/timeseries.min.json`)
 let newDat = await result3.json();
-console.log(newDat)
+// console.log(newDat)
 
-console.log(statewise)
+// console.log(statewise)
 updateData()
 
 createTable(newDat);
@@ -509,7 +509,7 @@ function runApp(){
 
 
 function updateData(){
-  console.log('test')
+  // console.log('test')
 
 //   let dat = await fetch(`https://api.covid19india.org/data.json`)
 //   let dat2 = await dat.json()
@@ -776,7 +776,7 @@ function createTable(newDat){
   state = st
   data2 = statewise
   var tthtml;
-  console.log(newDat,'ok')
+  // console.log(newDat,'ok')
   dateToday = ''
   d = new Date();
   year = d.getFullYear()
@@ -785,8 +785,25 @@ function createTable(newDat){
   month += 1
   if(month < 10)
     month = `0${month}`
+  if(today < 10)
+    today = `0${today}`
   dateToday = `${year}-${month}-${today}`
-  prevDate = `${year}-${month}-${today-1}`
+
+  const today2 = new Date()
+  const yesterday = new Date(today2)
+
+  yesterday.setDate(yesterday.getDate() - 1)
+  // console.log(yesterday,'yest')
+  year = yesterday.getFullYear()
+  month = yesterday.getMonth()
+  today = yesterday.getDate()
+  if(month < 10)
+    month = `0${month+1}`
+  else
+    month +=1
+  if(today < 10)
+    today = `0${today}`
+  prevDate = `${year}-${month}-${today}`
   
 
   for(const state in newDat){
@@ -799,7 +816,7 @@ function createTable(newDat){
     // console.log(newDat[state].dates[dateToday],dateToday)
     dataForToday = newDat[state].dates[dateToday]
     prevData = newDat[state].dates[prevDate]
-
+    // console.log(prevDate)
     if(dataForToday == undefined)
     dataForToday = prevData
     if(dataForToday == undefined) 
@@ -1026,7 +1043,7 @@ for (i = 0; i < li.length; i++) {
 
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button2');
-addBtn.style.display = 'none';
+// addBtn.style.display = 'none';
 
 window.addEventListener('beforeinstallprompt', (e) => {
 // Prevent Chrome 67 and earlier from automatically showing the prompt
