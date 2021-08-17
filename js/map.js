@@ -471,19 +471,19 @@ return res
 // https://api.covid19india.org/v4/min/timeseries.min.json
 
 async function getData(){
-let result = await fetch(`https://api.covid19india.org/states_daily.json`)
+let result = await fetch(`https://cors-anywhere.herokuapp.com/https://api.covid19india.org/states_daily.json`)
 let data = await result.json();
 let data2 = await data.states_daily;
 states_daily = await data2;
 
-let result2 = await fetch(`https://api.covid19india.org/data.json`)
+let result2 = await fetch(`https://cors-anywhere.herokuapp.com/https://api.covid19india.org/data.json`)
   let dat = await result2.json();
   let dat2 = await dat.cases_time_series;
   let dat3 = await dat.statewise;
   statewise = await dat3;
   cases_time_series = await dat2;
 
-let result3 = await fetch(`https://api.covid19india.org/v4/min/timeseries.min.json`)
+let result3 = await fetch(`https://cors-anywhere.herokuapp.com/https://api.covid19india.org/v4/min/timeseries.min.json`)
 let newDat = await result3.json();
 // console.log(newDat)
 
